@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>ELLIOT LEE</title>
 		<meta name="description" content="ELLIOT LEE" />
-
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
 		<link rel="stylesheet" href="assets/style2.css">
@@ -19,7 +19,7 @@
 					<div class="col-4">
 						<h1><a id="main" href="index.html">ELLIOT LEE</a></h1>
 
-						<div class="container">
+						<div class="container" id="collapsibles-nav">
 							<!-- <h4>Elliot Lee</h4> -->
 							<ul>
 								<li><a data-bs-toggle="collapse" data-bs-target="#embedResume" role="button" aria-expanded="false">resume</a></li>
@@ -74,9 +74,9 @@
 	 						<embed  width="100%" height="100%" src="route-test.html" />
 						</div>
 						
-						<div class="col collapse collapse-horizontal show" id="expl" data-bs-parent="#collapsibles" style="height:100%">
+						<div class="col collapse show" id="expl" data-bs-parent="#collapsibles" style="height:100%">
 							<div class="pulse">
-		 						<div class="rotate m-5" style="width:40%">
+		 						<div class="rotate m-5" style="width:50%">
 		 							<img src="assets/images/expl6.webp" class="mt-5 flip" id="explImg">
 		 						</div>
 	 						</div>
@@ -110,6 +110,26 @@
 				document.body.classList.add("loaded");
 			});
 		</script> -->
+
+		<script>
+			$('#collapsibles .collapse').each((i, e) => 
+			    $(e).on('hidden.bs.collapse', () => {
+			        // check if an accordion item is expanded
+			        let isExpanded = false;
+			        $('#collapsibles-nav [aria-expanded]').each((i, element) => {
+			        	// console.log("HEREHEREHEREHEREHEREHEREHERE");
+			            if ($(element).attr("aria-expanded") === 'true') {
+			                isExpanded = true;
+			            }
+			        });
+			    
+			        // show the accordion item
+			        if (!isExpanded) {
+			            $("#expl").collapse("show");
+			        }
+			    })
+			);	
+		</script>
 
 	</body>
 
