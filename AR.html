@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Ohlone AR</title>
+        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+        <!-- Look-at component. We don't need this now, but we will later. -->
+        <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+        <script src="js/gesture-detector.js"></script>
+        <script src="js/gesture-handler.js"></script>
+    </head>
+    <body>
+        <a-scene
+            vr-mode-ui="enabled: false"
+            arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false;'
+            renderer='antialias: true; alpha: true'
+            gesture-detector>
+            <a-camera gps-projected-camera rotation-reader></a-camera>
+           
+            <a-assets>
+                <a-asset-item gps-projected-entity-place='latitude: 37.3542852; longitude: -121.9398402' id="monjerio" src="/models/monjerio.obj"></a-asset-item>
+                <a-asset-item gps-projected-entity-place='latitude: 37.3542852; longitude: -121.9398402' id="monjerio-mtl" src="/models/monjerio.mtl"></a-asset-item>
+            </a-assets>
+
+            <a-entity obj-model="obj: #monjerio; mtl: #monjerio-mtl" gesture-handler></a-entity>
+        </a-scene>
+    </body>
+</html>

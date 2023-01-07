@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Benne&family=Roboto:wght@300;700&family=Noto+Sans&family=Noto+Serif&family=Oxygen:wght@300;400;700&family=Aleo&family=Raleway:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&family=Lato&display=swap');
+
+body {
+	font-family: Lato;
+  background-color: white;
+}
+
+main {
+
+
+}
+
+.background {
+  background-image: url("images/pexels-eberhard-grossgasteiger-1287145-wide.jpg");
+  background-size:  100% auto;
+
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+  background-repeat: no-repeat;
+}
+
+.title {
+  font-size: 10em;
+}
+
+p {
+	font-family: Lato;
+	font-size:  1.3em;
+  backdrop-filter: blur(25px);
+}
+
+h1 {
+	font-family: EB Garamond;
+  /*font-size: 3rem;*/
+  color: black;
+}
+
+h2 {
+	font-family: EB Garamond;
+  font-size: 2.5rem;
+	color:  #133926;
+  backdrop-filter: blur(25px);
+}
+
+h3 {
+  font-family: EB Garamond;
+  font-size: 2rem;
+}
+
+h4 {
+  font-family: EB Garamond;
+  font-size: 5rem;
+}
+
+color:	#21618c;
+
+
+header {
+	height: 7em;
+}
+
+footer {
+  background-color: ghostwhite;
+}
+
+
+
+.navbar {
+  backdrop-filter: blur(25px) brightness(60%);
+  background-color:  white;
+}
+
+.thumbnail {
+	width: 400px;
+	height: 70px;
+}
+
+.nav-link {
+	color: black;
+  font-weight: 300;
+  /*-webkit-text-stroke: 1px white;*/
+}
+
+.gallery-nav{
+  color: black;
+  font-weight: 300;
+  /*-webkit-text-stroke: 0.5px black;*/
+}
+
+.nav-link:hover {
+	color: #737373;
+}
+
+[aria-current="page"] {
+  font-weight: bold;
+}
+
+.btn:hover {
+  background-color:#737373;
+}
+
+
+
+a {
+  text-decoration: none;
+  color: mediumblue;
+}
+
+
+dt {
+	font-size: 0.8em;
+	font-family: Noto Sans;
+}
+
+dl {
+  font-size: 0.8em;
+  font-family: Noto Sans;
+}
+
+
+dd {
+	font-size: 1.3em;
+	font-family: Noto Sans;
+}
+
+/*resize img thumbnails*/
+#gallery img {
+  height: 75vw;
+  object-fit: cover;
+  margin-bottom: 1em;
+}
+@media (min-width: 576px) {
+  #gallery img {
+    height: 35vw;
+  }
+}
+@media (min-width: 992px) {
+  #gallery img {
+    height: 18vw;
+  }
+}
+.carousel-item img {
+  height: auto;
+  /*object-fit: cover;*/
+
+}
+@media (min-width: 576px) {
+  .carousel-item img {
+    height: auto;
+  }
+}
+/*resize img thumbnails*/
+
+
+.nav-pills .nav-link.active {
+  border-right: 2px solid #444444;
+  border-top: 2px solid #444444;
+  border-bottom: 2px solid #444444;
+  border-left: 2px solid #444444;
+  border-radius: 25px;
+  color: #2b2b2b;
+  background-color: transparent;
+}
+
+
+.btn {
+  border-right: 3px solid #444444;
+  border-top: 3px solid #444444;
+  border-bottom: 3px solid #444444;
+  border-left: 3px solid #444444;
+  border-radius: 25px;
+}
+
+.btn-lg {
+  background-color: floralwhite;
+}
+
+.alert {
+  display:inline-block;
+}
+
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 1.5s;
+}
+
+.fade-in.appear {
+  opacity: 1;
+}
+
+
+.no-padding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+
+
+/*=== Trigger  ===*/
+/*.animate {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+*/
+
+
+
+/* animation */
+/*==== FADE IN UP ===*/
+/* @-webkit-keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 10%, 0);
+    transform: translate3d(0, 10%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.fadeInUp {
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp;
+}
+*/
+

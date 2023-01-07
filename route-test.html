@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+     integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+     crossorigin=""/>
+     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Routeabaga</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+     <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+     integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
+     crossorigin=""></script>
+  </head>
+  <body>
+    
+
+    <div class="">
+      <div id="map" style="width: 100%; height: 28em;"></div>
+      <div class="row justify-content-around pb-3">
+        <div class="col ms-5">
+          <input readonly id="lat1" size="13">,
+          <input readonly id="lng1" size="13">
+        </div>
+        <div class="col">
+          <input readonly id="lat2" size="13">,
+          <input readonly id="lng2" size="13">
+        </div>
+        <div class="col">
+          <input id="mpg" value="20" size="10">mpg</input>
+          <button onClick="go()">Go!</button>
+        </div>
+      </div>
+      </div>
+    </div>
+<div class="row " >
+    <div class="col-1">
+      <svg id="svg" height="70">
+            <circle id="bluecircle" cx="35"
+            cy="22" r="5" fill="blue" stroke="blue"/>
+            <circle id="yellowcircle" cx="35"
+            cy="35" r="5" fill="yellow" stroke="yellow"/>
+            <circle id="orangecircle" cx="35"
+            cy="50" r="5" fill="orange" stroke="orange"/>
+            <circle id="redcircle" cx="35"
+            cy="65" r="5" fill="red" stroke="red"/>
+            <text x="30" y="12">Traffic Incident Level</text>
+            <text x="45" y="27"> 1</text>
+            <text x="45" y="41"> 2</text>
+            <text x="45" y="56"> 3</text>
+            <text x="45" y="70"> 4</text>
+      </svg>
+    </div>
+
+      <div class="col-11">
+      <table class="table ">
+        <thead>
+          <tr >
+            <th scope="col"></th>
+            <th scope="col" style= "color:blue"><u>Walk</u></th>
+            <th scope="col" style= "color:red"><u>Bike</u></th>
+            <th scope="col" style= "color:purple"><u>Drive</u></th>
+            <th scope="col" style= "color:green"><u>Transit</u></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Distance</th>
+            <td id="out1"></td>
+            <td id="out2"></td>
+            <td id="out3"></td>
+            <td id="out4"></td>
+          </tr>
+          <tr>
+            <th scope="row">Duration</th>
+            <td id="out5"></td>
+            <td id="out6"></td>
+            <td id="out7"></td>
+            <td id="out8"></td>
+          </tr>
+          <tr>
+            <th scope="row">Cost</th>
+            <td id="out9"></td>
+            <td id="out10"></td>
+            <td id="out11"></td>
+            <td id="out12"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+
+    <div style="padding-left: 1em">
+      <h4>INRIX trial API is expired and route mapping no longer functions. See youtube video for functioning app.</h4>
+      <!--<a href="https://www.youtube.com/watch?v=KU5y1T3mvlA">https://www.youtube.com/watch?v=KU5y1T3mvlA</a>-->
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/KU5y1T3mvlA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </br>
+    <div>
+      <h4 style="padding-left: 0.5em">Technologies used</h4>
+      <ul class="list-group list-group-flush ">
+          <li class="list-group-item"> HTML/CSS(bootstrap5)</li>
+          <li class="list-group-item">javascript</li>
+          <li class="list-group-item">inrix API - findroute, fuelstations, safetyalertsincidents (not functional, trial API expired)</li>
+          <li class="list-group-item">google API - directions</li>
+          <li class="list-group-item">leaflet.js (openstreetmap)</li>
+          <li class="list-group-item">node.js</li>
+      </div>
+
+
+
+<script>
+  let x1, y1, x2, y2;
+  let dots = 0;
+  let polyline1,polyline2,polyline3,polyline4
+
+
+  const map = L.map('map').setView([37.75823, -122.43], 13);
+
+  const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+
+  const polygon = L.polygon([
+    [37.858,-122.541], [37.858,-122.341], [37.699,-122.341], [37.699,-122.541]
+  ], {fillOpacity: 0} ).addTo(map)
+
+
+  const popup = L.popup()
+    .setLatLng([37.75723, -122.44])
+    .setContent('click two points on the map')
+    .openOn(map);
+
+
+
+  let circle1 = L.circleMarker([0,0], {
+          color: 'black',
+          fillColor: 'black',
+          fillOpacity: 1,
+          radius: 8
+        });  
+  let circle2 = L.circleMarker([0,0], {
+          color: 'black',
+          fillColor: 'black',
+          fillOpacity: 1,
+          radius: 8
+        });
+
+  function onMapClick(e) {
+
+      // popup
+      //   .setLatLng(e.latlng)
+      //   .setContent(`${e.latlng.lat}, ${e.latlng.lng}`)
+      //   .openOn(map);
+
+      if(dots == 0) {
+        circle1.setLatLng(e.latlng);
+        circle1.addTo(map).bindPopup('pt1');
+
+        x1 = e.latlng.lat;
+        y1 = e.latlng.lng;
+
+        let x1doc = document.getElementById("lat1");
+        let y1doc = document.getElementById("lng1");
+        x1doc.value = x1;
+        y1doc.value = y1;
+
+      }
+      if(dots == 1) {
+        circle2.setLatLng(e.latlng);
+        circle2.addTo(map).bindPopup('pt2');
+
+        x2 = e.latlng.lat;
+        y2 = e.latlng.lng;
+
+        let x2doc = document.getElementById("lat2");
+        let y2doc = document.getElementById("lng2");
+        x2doc.value = x2;
+        y2doc.value = y2;
+      }
+
+      if(dots>=2) {
+        if(dots%2==0) {
+          circle1.setLatLng(e.latlng);
+          x1 = e.latlng.lat;
+          y1 = e.latlng.lng;
+          let x1doc = document.getElementById("lat1");
+          let y1doc = document.getElementById("lng1");
+          x1doc.value = x1;
+          y1doc.value = y1;
+        }
+        else if(dots%2 ==1) {
+          circle2.setLatLng(e.latlng);
+          x2 = e.latlng.lat;
+          y2 = e.latlng.lng;
+          let x2doc = document.getElementById("lat2");
+          let y2doc = document.getElementById("lng2");
+          x2doc.value = x2;
+          y2doc.value = y2;
+        }
+      }
+
+      dots++;
+  
+  }
+
+  map.on('click', onMapClick);
+
+  function go()
+  {
+    doEverythingElse(x1, y1, x2, y2)
+  }
+
+  function doEverythingElse(x1,y1,x2,y2)
+  {
+    let out1 = document.getElementById("out1")
+    
+
+    let output = document.getElementById("output")
+        let carDistance = 0;
+        let carTime = 0;
+        let carCost = 2;
+        let bikeDistance = 0;
+        let bikeTime = 0;
+        let walkDistance = 0;
+        let walkTime = 0;
+        let transitDistance = 0;
+        let transitTime = 0;
+        let transitCost = 0;
+        let gasMileage = document.getElementById("mpg").value;
+
+  }
+
+
+  map.on('click', onMapClick);
+
+</script>
+  </body>
+</html>

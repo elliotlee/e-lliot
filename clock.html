@@ -1,0 +1,365 @@
+<!doctype html>
+<html>
+<head>
+	<title>clock</title>
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.101.1/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.101.1/examples/js/controls/OrbitControls.js"></script>
+
+<script>
+// wait for three.min.js to load
+window.onload = init;
+
+
+let renderer, scene, camera;
+let cube, sphere, circle;
+let left = 1;
+let right = 0;
+
+
+function init()
+{
+	// renderer
+	renderer = new THREE.WebGLRenderer();
+	renderer.setSize(400, 600);
+	document.body.appendChild(renderer.domElement);
+
+	
+
+	// scene
+	line12a = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.2, 0.02),
+                              new THREE.MeshBasicMaterial({color:0xc0c0c0}));
+	line12b = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.2, 0.02),
+                              new THREE.MeshBasicMaterial({color:0xc0c0c0}));
+	line1 = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.2, 0.02),
+                              new THREE.MeshBasicMaterial({color:0xc0c0c0}));
+	line2 = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.2, 0.02),
+                              new THREE.MeshBasicMaterial({color:0xc0c0c0}));
+	line3 = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.2, 0.02),
+                              new THREE.MeshBasicMaterial({color:0xc0c0c0}));
+	line4 = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.2, 0.02),
+                              new THREE.MeshBasicMaterial({color:0xc0c0c0}));
+	line5 = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.2, 0.02),
+                              new THREE.MeshBasicMaterial({color:0xc0c0c0}));
+	line6 = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.2, 0.02),
+                              new THREE.MeshBasicMaterial({color:0xc0c0c0}));
+	line7 = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.2, 0.02),
+                              new THREE.MeshBasicMaterial({color:0xc0c0c0}));
+	line8 = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.2, 0.02),
+                              new THREE.MeshBasicMaterial({color:0xc0c0c0}));
+	line9 = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.2, 0.02),
+                              new THREE.MeshBasicMaterial({color:0xc0c0c0}));
+	line10 = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.2, 0.02),
+                              new THREE.MeshBasicMaterial({color:0xc0c0c0}));
+	line11 = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.2, 0.02),
+                              new THREE.MeshBasicMaterial({color:0xc0c0c0}));
+	logo = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.2, 0.02),
+                              new THREE.MeshBasicMaterial({color:0xc0c0c0}));
+	second = new THREE.Mesh(new THREE.BoxGeometry(0.02, 1.2, 0.01),
+                              new THREE.MeshBasicMaterial({color:0xc80000}));
+	minute = new THREE.Mesh(new THREE.BoxGeometry(0.03, 1, 0.01),
+                              new THREE.MeshBasicMaterial({color:0xa0a0a0}));
+	hour = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.65, 0.01),
+                              new THREE.MeshBasicMaterial({color:0xa0a0a0}));
+        circle = new THREE.Mesh(new THREE.CircleGeometry(1, 50),
+                                new THREE.MeshBasicMaterial({color:0xffffff, side:THREE.DoubleSide }));
+        sphere = new THREE.Mesh(new THREE.SphereGeometry(0.015),
+                                new THREE.MeshBasicMaterial({color:0x505050}));
+
+        panel1 = new THREE.Mesh(new THREE.BoxGeometry(2.2, 10, 0.08),
+                              new THREE.MeshPhongMaterial({color:0x435e62, transparent:true, opacity:0.2, shininess: 1}));
+        panel2 = new THREE.Mesh(new THREE.BoxGeometry(2.2, 10, 0.08), 
+        			new THREE.MeshPhongMaterial({color:0xe0e0e0, transparent:true, opacity:0.75, shininess: 1}));
+        cylinder1 = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.5, 10, 1),
+                              new THREE.MeshBasicMaterial({color:0xb0b0b0}));
+        cylinder2 = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.5, 10, 1),
+                              new THREE.MeshBasicMaterial({color:0xb0b0b0}));
+        cylinder3 = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.5, 10, 1),
+                              new THREE.MeshBasicMaterial({color:0xb0b0b0}));
+        cylinder4 = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.5, 10, 1),
+                              new THREE.MeshBasicMaterial({color:0xb0b0b0}));
+        base = new THREE.Mesh(new THREE.BoxGeometry(2.8, 0.6, 1.3),
+                              new THREE.MeshBasicMaterial({color:0xe0e0e0}));
+        wire = new THREE.Mesh(new THREE.CylinderGeometry(0.01, 0.005, 6, 10, 1),
+                              new THREE.MeshBasicMaterial({color:0xc0c0c0}));
+        weight = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 1, 10, 1),
+                              new THREE.MeshBasicMaterial({color:0xc0c0c0}));
+        box = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 0.3),
+                              new THREE.MeshBasicMaterial({color:0xd0d0d0}));
+        spot = new THREE.Mesh(new THREE.SphereGeometry(0.07),
+                                new THREE.MeshBasicMaterial({color:0x505050}));
+
+
+	scene = new THREE.Scene();
+
+	sfr = new THREE.Object3D();
+	mfr = new THREE.Object3D();
+	hfr = new THREE.Object3D();
+	pfr = new THREE.Object3D();
+
+	circle.translateY(3.4);
+	line12a.translateY(0.86);
+	line12a.translateX(-0.02);
+	line12b.translateY(0.86);
+	line12b.translateX(0.02);
+	line1.rotateZ(-Math.PI/6);
+	line1.translateY(0.86);
+	line2.rotateZ((-Math.PI/6)*2);
+	line2.translateY(0.86);
+	line3.rotateZ((-Math.PI/6)*3);
+	line3.translateY(0.86);
+	line4.rotateZ((-Math.PI/6)*4);
+	line4.translateY(0.86);
+	line5.rotateZ((-Math.PI/6)*5);
+	line5.translateY(0.86);
+	line6.rotateZ((-Math.PI/6)*6);
+	line6.translateY(0.86);
+	line7.rotateZ((-Math.PI/6)*7);
+	line7.translateY(0.86);
+	line8.rotateZ((-Math.PI/6)*8);
+	line8.translateY(0.86);
+	line9.rotateZ((-Math.PI/6)*9);
+	line9.translateY(0.86);
+	line10.rotateZ((-Math.PI/6)*10);
+	line10.translateY(0.86);
+	line11.rotateZ((-Math.PI/6)*11);
+	line11.translateY(0.86);
+	logo.rotateZ((-Math.PI/6)*3);
+	logo.translateX(-0.44);
+	//second.translateY(0.35);
+	//second.translateZ(0.03);
+	second.position.set(0,0.35,0.03);
+	//minute.translateY(0.46);
+	//minute.translateZ(0.02);
+	minute.position.set(0,0.46,0.02);
+	//hour.translateY(0.285);
+	//hour.translateZ(0.01);
+	hour.position.set(0,0.285,0.01);
+	sphere.translateZ(0.03);
+	panel1.translateZ(-0.07);
+	panel2.translateZ(-0.5);
+	cylinder1.rotateX(Math.PI/2);
+	cylinder1.translateX(-0.75);
+	cylinder1.translateY(-0.2);
+	cylinder1.translateZ(-4.65);
+	cylinder2.rotateX(Math.PI/2);
+	cylinder2.translateX(0.75);
+	cylinder2.translateY(-0.2);
+	cylinder2.translateZ(-4.65);
+	cylinder3.rotateX(Math.PI/2);
+	cylinder3.translateX(-0.75);
+	cylinder3.translateY(-0.2);
+	cylinder3.translateZ(4);
+	cylinder4.rotateX(Math.PI/2);
+	cylinder4.translateX(0.75);
+	cylinder4.translateY(-0.2);
+	cylinder4.translateZ(4);
+	base.translateY(-5.3);
+	base.translateZ(-0.26);
+	wire.translateY(-3);
+	wire.translateZ(-0.28);
+	weight.translateY(-3.2);
+	weight.translateZ(0);
+	box.translateZ(-0.2);
+	spot.translateY(0.28);
+	spot.translateZ(0.45);
+
+	scene.add(circle);
+	circle.add(line12a);
+	circle.add(line12b);
+	circle.add(line1);
+	circle.add(line2);
+	circle.add(line3);
+	circle.add(line4);
+	circle.add(line5);
+	circle.add(line6);
+	circle.add(line7);
+	circle.add(line8);
+	circle.add(line9);
+	circle.add(line10);
+	circle.add(line11);
+	circle.add(logo);
+	circle.add(sfr);
+	circle.add(mfr);
+	circle.add(hfr);
+	circle.add(pfr);
+	sfr.add(second);
+	mfr.add(minute);
+	hfr.add(hour);
+	pfr.add(wire);
+	circle.add(sphere);
+	scene.add(panel1);
+	scene.add(panel2);
+	scene.add(cylinder1);
+	scene.add(cylinder2);
+	scene.add(cylinder3);
+	scene.add(cylinder4);
+	scene.add(base);
+	pfr.add(wire);
+	wire.add(weight);
+	circle.add(box);
+	base.add(spot);
+
+
+	// lighting
+	light = new THREE.AmbientLight(0xffffff, 1);
+	scene.add(light);
+
+	directionalLight = new THREE.DirectionalLight( 0xffffff, 1);
+	directionalLight.position.set( 1, 1, 1);
+	scene.add(directionalLight);
+
+	// camera
+	camera = new THREE.PerspectiveCamera(30, 400/600, 0.1, 1000);
+	camera.position.set(15,0,16);
+	//camera.position.set(1,0,16);
+	camera.lookAt(scene.position);
+
+	// OrbitControls left button: rotate; mid: dolly (back-forth); right: pan (left-right)
+	controls = new THREE.OrbitControls(camera, renderer.domElement);
+	controls.autoRotate = true;
+	controls.autoRotateSpeed = 2.0; // revolution per minute
+
+
+	// render
+	animate()
+}
+
+// function setup_tween()
+// {
+// 	var position = {x:0, y:0, z:0};
+// 	tween = new TWEEN.tween(position)
+// 		.to({x:1, y:1, z:1}, 1000)
+// 		.easing(TWEEN.Easing.Quadratic.InOut)
+// 		.onUpdate(() => {
+// 			pfr.rotation.z
+// 		});
+// 	tween.start();
+// }
+
+// tween.update();
+//couldnt figure out tween
+
+function animate()
+{	
+
+	requestAnimationFrame(animate)
+	controls.update()
+	let speed = 0.0017;
+
+	let now = new Date();
+	let hour = Math.floor(now.getHours());
+	let minute = Math.round(now.getMinutes());
+	let second = Math.floor(now.getSeconds());
+	let msecs = Math.floor(now.getMilliseconds());
+
+	sfr.rotation.z = -2*Math.PI*(second/60);
+	mfr.rotation.z = -2*Math.PI*(minute/60);
+	hfr.rotation.z = -2*Math.PI*(hour/12);
+
+
+
+	// pendulum swing
+	if(left)
+	{	
+		if(pfr.rotation.z <= -speed*58)
+		{
+			pfr.rotation.z -= speed*0.12;
+		}
+		else if(pfr.rotation.z <= -speed*50)
+		{
+			pfr.rotation.z -= speed*0.6;
+		}
+		else if(pfr.rotation.z <= -speed*30 && pfr.rotation.z > -speed*50)
+		{
+			pfr.rotation.z -= speed*0.9;
+		}
+		else if(pfr.rotation.z <= -speed*10 && pfr.rotation.z > -speed*30)
+		{
+			pfr.rotation.z -= speed*1.2;
+		}
+		else if(pfr.rotation.z <= speed*10 && pfr.rotation.z > -speed*10)
+		{
+			pfr.rotation.z -= speed*1.4;
+		}
+		else if(pfr.rotation.z <= speed*30 && pfr.rotation.z > speed*10)
+		{
+			pfr.rotation.z -= speed*1.2;
+		}
+		else if(pfr.rotation.z <= speed*58 && pfr.rotation.z > speed*30)
+		{
+			pfr.rotation.z -= speed;
+		}
+		else
+		{
+			pfr.rotation.z -= speed*0.4;
+		}
+	}
+
+	else if(right)
+	{
+		if(pfr.rotation.z >= speed*58)
+		{
+			pfr.rotation.z += speed*0.12;
+		}
+		else if(pfr.rotation.z >= speed*50)
+		{
+			pfr.rotation.z += speed*0.6;
+		}
+		else if(pfr.rotation.z >= speed*30 && pfr.rotation.z < speed*50)
+		{
+			pfr.rotation.z += speed*0.9;
+		}
+		else if(pfr.rotation.z >= speed*10 && pfr.rotation.z < speed*30)
+		{
+			pfr.rotation.z += speed*1.2;
+		}
+		else if(pfr.rotation.z >= -speed*10 && pfr.rotation.z < speed*10)
+		{
+			pfr.rotation.z += speed*1.4;
+		}
+		else if(pfr.rotation.z >= -speed*30 && pfr.rotation.z < -speed*10)
+		{
+			pfr.rotation.z += speed*1.2;
+		}
+		else if(pfr.rotation.z >= -speed*58 && pfr.rotation.z < -speed*30)
+		{
+			pfr.rotation.z += speed;
+		}
+		else
+		{
+			pfr.rotation.z += speed*0.4;
+		}
+	}
+
+	if(pfr.rotation.z < -speed*60)
+	{
+		left = 0;
+		right = 1;
+	}
+
+	if(pfr.rotation.z > speed*60)
+	{
+		left = 1;
+		right = 0;
+	}
+
+
+
+	renderer.setClearColor(0xf5f5f5)
+	renderer.render(scene, camera)
+
+}
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
+
+

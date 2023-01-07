@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Barycentric Coordinates Triangle</title>
+</head>
+<body>
+	<script src="https://threejs.org/build/three.min.js"></script>
+
+	<label>Enter 3 colors in hex</label>
+	<input id="color1" value="0f3754"></input>
+	<input id="color2" value="e95419"></input>
+	<input id="color3" value="bbeedd"></input>
+	<button onclick="doStuff()">let's fking gooooo</button>
+
+	<canvas id="canvas" width="500" height="500" style="border:1px solid #b0b0b0;" />
+
+	<script>
+
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+
+		function doStuff() {
+
+			// change color of text
+			let text1 = document.getElementById('color1');
+			text1.style.background = "#" + text1.value;
+			let text2 = document.getElementById('color2');
+			text2.style.background = "#" + text2.value;
+			let text3 = document.getElementById('color3');
+			text3.style.background = "#" + text3.value;
+
+			// get RGB components of each point
+			let color1 = document.getElementById('color1').value.substring(0,6);
+			let color1R = color1.substring(0,2);
+			let color1G = color1.substring(2,4);
+			let color1B = color1.substring(4,6);
+			let color2 = document.getElementById('color2').value.substring(0,6);
+			let color2R = color2.substring(0,2);
+			let color2G = color2.substring(2,4);
+			let color2B = color2.substring(4,6);
+			let color3 = document.getElementById('color3').value.substring(0,6);
+			let color3R = color3.substring(0,2);
+			let color3G = color3.substring(2,4);
+			let color3B = color3.substring(4,6);
+			// console.log(color1+" "+color2+" "+color3);
+
+			let xX = 0, xY = 0, 
+				yX = 0, yY = 400, 
+				zX = 400, zY = 400;
+
+			let vectXZ = new THREE.Vector2(zX-xX,zY-xY);
+			let vectXY = new THREE.Vector2(yX-xX,yY-xY);
+
+			let vectYX = new THREE.Vector2(xX-yX,xY-yY);
+			let vectYZ = new THREE.Vector2(zX-yX,zY-yY);
+
+			let vectZX = new THREE.Vector2(xX-zX,xY-zY);
+			let vectZY = new THREE.Vector2(yX-zX,yY-zY);
+
+			// (j, i) is point u
+			for(let i = 0; i <=400; i++) {
+				for(let j = 0; j <= i; j++) {
+
+					let vectXU = new THREE.Vector2(j-xX,i-xY);
+					let vectYU = new THREE.Vector2(j-yX,i-yY);
+					let vectZU = new THREE.Vector2(j-zX,i-zY);
+
+					let beta = (vectXZ.cross(vectXU))/(vectXZ.cross(vectXY));
+					let gamma = (vectXU.cross(vectXY))/(vectXZ.cross(vectXY));
+					let alpha = 1 - beta - gamma;
+
+					// combine RGB components with alpha, beta, gamma percentages
+					let alphaR = alpha * parseInt(color1.substring(0,2), 16);
+					let alphaG = alpha * parseInt(color1.substring(2,4), 16);
+					let alphaB = alpha * parseInt(color1.substring(4,6), 16);
+					let betaR = beta * parseInt(color2.substring(0,2), 16);
+					let betaG = beta * parseInt(color2.substring(2,4), 16);
+					let betaB = beta * parseInt(color2.substring(4,6), 16);
+					let gammaR = gamma * parseInt(color3.substring(0,2), 16);
+					let gammaG = gamma * parseInt(color3.substring(2,4), 16);
+					let gammaB = gamma * parseInt(color3.substring(4,6), 16);
+					let R = (alphaR + betaR + gammaR).toString(16).substring(0,2);
+					let G = (alphaG + betaG + gammaG).toString(16).substring(0,2);
+					let B = (alphaB + betaB + gammaB).toString(16).substring(0,2);
+					
+					// fix if color string section has single digit or a decimal
+					if(R.length == 1 || R.substring(1,2) ==".") {
+						R = "0" + R.substring(0,1);
+					}
+					if(G.length == 1 || G.substring(1,2) ==".") {
+						G = "0" + G.substring(0,1);
+					}
+					if(B.length == 1 || B.substring(1,2) ==".") {
+						B = "0" + B.substring(0,1);
+					}
+
+					let color = R+G+B;
+					// console.log(color);
+
+					// draw color at point u
+					ctx.moveTo(j, i);
+					ctx.beginPath();
+					ctx.arc(j, i, 1, 0, 2 * Math.PI, false);
+					ctx.fillStyle = "#"+color;
+					ctx.fill();
+				}
+			}
+
+			// draw triangle points
+			ctx.moveTo(xX, xY);
+			ctx.beginPath();
+			ctx.arc(xX, xY, 5, 0, 2 * Math.PI, false);
+			ctx.fillStyle = "#"+color1;
+			ctx.fill();
+
+			ctx.moveTo(yX, yY);
+			ctx.beginPath();
+			ctx.arc(yX, yY, 5, 0, 2 * Math.PI, false);
+			ctx.fillStyle = "#"+color2;
+			ctx.fill();
+
+			ctx.moveTo(zX, zY);
+			ctx.beginPath();
+			ctx.arc(zX, zY, 5, 0, 2 * Math.PI, false);
+			ctx.fillStyle = "#"+color3;
+			ctx.fill();
+		}
+	</script>
+</body>
+</html>
