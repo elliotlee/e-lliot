@@ -93,7 +93,7 @@ li{
 }
 
 li:not(:last-child) {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.7em;
 }
 
 li:last-child {
