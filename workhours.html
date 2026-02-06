@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Time Calculator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Share Tech Mono', 'Courier New', monospace;
+            background: #0a0e27;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 65, 0.03) 2px, rgba(0, 255, 65, 0.03) 4px),
+                linear-gradient(180deg, #0a0e27 0%, #1a1f3a 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #00ff41;
+            position: relative;
+        }
+        
+        /* Scanline element - real div for better control */
+        .scanline {
+            position: fixed;
+            left: 0;
+            height: 2px;
+            width: 700px;
+            background: linear-gradient(90deg, 
+                transparent 0%,
+                rgba(0, 255, 65, 0.2) 20%,
+                rgba(0, 255, 65, 0.8) 40%,
+                #00ff41 50%,
+                rgba(0, 255, 65, 0.8) 60%,
+                rgba(0, 255, 65, 0.2) 80%,
+                transparent 100%);
+            pointer-events: none;
+            z-index: 1;
+            will-change: transform;
+        }
+        
+        .container {
+            background: rgba(10, 14, 39, 0.95);
+            border: 2px solid #00ff41;
+            border-radius: 4px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 
+                0 0 20px rgba(0, 255, 65, 0.3),
+                inset 0 0 20px rgba(0, 255, 65, 0.05);
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+        
+        h1 {
+            color: #00ff41;
+            margin-bottom: 30px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 24px;
+            text-shadow: 0 0 10px #00ff41;
+            animation: flicker 3s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.95; }
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            border-left: 2px solid #00ff41;
+            padding-left: 15px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #00ff41;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #00cc33;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #00ff41;
+            border-radius: 0;
+            font-size: 16px;
+            font-family: 'Share Tech Mono', 'Courier New', monospace;
+            color: #00ff41;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #00ff41;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        input::placeholder {
+            color: rgba(0, 255, 65, 0.3);
+        }
+        
+        input.error {
+            border-color: #ff0040;
+            box-shadow: 0 0 10px rgba(255, 0, 64, 0.5);
+        }
+        
+        select {
+            cursor: pointer;
+        }
+        
+        select option {
+            background: #0a0e27;
+            color: #00ff41;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .radio-option input[type="radio"] {
+            width: auto;
+            cursor: pointer;
+            accent-color: #00ff41;
+        }
+        
+        .radio-option label {
+            cursor: pointer;
+            margin: 0;
+        }
+        
+        button {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 255, 65, 0.1);
+            color: #00ff41;
+            border: 2px solid #00ff41;
+            border-radius: 0;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'Share Tech Mono', 'Courier New', monospace;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 255, 65, 0.2);
+            transition: left 0.3s;
+        }
+        
+        button:hover::before {
+            left: 100%;
+        }
+        
+        button:hover {
+            background: rgba(0, 255, 65, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+            text-shadow: 0 0 5px #00ff41;
+        }
+        
+        button:active {
+            transform: scale(0.98);
+        }
+        
+        .error-message {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 0, 64, 0.1);
+            border: 1px solid #ff0040;
+            border-radius: 0;
+            color: #ff0040;
+            font-size: 13px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(255, 0, 64, 0.3);
+        }
+        
+        .error-message.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .result {
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(0, 255, 65, 0.05);
+            border: 2px solid #00ff41;
+            border-radius: 0;
+            text-align: center;
+            display: none;
+            position: relative;
+        }
+        
+        .result::before {
+            content: '> CALCULATION COMPLETE';
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #0a0e27;
+            padding: 0 10px;
+            font-size: 11px;
+            color: #00ff41;
+            letter-spacing: 2px;
+        }
+        
+        .result.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .result-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #00ff41;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px #00ff41;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { text-shadow: 0 0 15px #00ff41; }
+            50% { text-shadow: 0 0 25px #00ff41, 0 0 35px #00ff41; }
+        }
+        
+        .result-label {
+            font-size: 14px;
+            color: #00cc33;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .result-breakdown {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 255, 65, 0.3);
+            font-size: 13px;
+            color: #00cc33;
+            line-height: 1.8;
+        }
+        
+        .tax-info {
+            margin-top: 10px;
+            padding: 12px;
+            background: rgba(255, 204, 0, 0.1);
+            border: 1px solid #ffcc00;
+            border-radius: 0;
+            font-size: 12px;
+            color: #ffcc00;
+            text-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+        }
+        
+        .k401-info {
+            margin-top: 10px;
+            padding: 12px;
+            background: rgba(0, 204, 255, 0.1);
+            border: 1px solid #00ccff;
+            border-radius: 0;
+            font-size: 12px;
+            color: #00ccff;
+            text-shadow: 0 0 5px rgba(0, 204, 255, 0.5);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .helper-text {
+            font-size: 11px;
+            color: rgba(0, 255, 65, 0.5);
+            margin-top: 3px;
+            letter-spacing: 1px;
+        }
+        
+        strong {
+            color: #00ff41;
+            font-weight: normal;
+            text-shadow: 0 0 5px #00ff41;
+        }
+        
+        /* Scanline effect - only on background, behind container */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="scanline"></div>
+    <div class="container">
+        <h1>Work Time Calculator</h1>
+        
+        <div class="section">
+            <div class="section-title">[ Income ]</div>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="hourly" name="payType" value="hourly" checked>
+                    <label for="hourly">Hourly</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="salary" name="payType" value="salary">
+                    <label for="salary">Salary</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="income" name="payType" value="income">
+                    <label for="income">Total Income</label>
+                </div>
+            </div>
+            
+            <div id="hourlyInput" class="input-group">
+                <label for="hourlyRate">Hourly Rate ($)</label>
+                <input type="number" id="hourlyRate" placeholder="25.00" step="0.01" min="0">
+                
+                <label for="hourlyWeekHours" style="margin-top: 10px;">Hours per Week</label>
+                <input type="number" id="hourlyWeekHours" placeholder="0" value="0" step="1" min="0">
+                <div class="helper-text">// Optional: For tax calculation on annual income</div>
+            </div>
+            
+            <div id="salaryInput" class="input-group hidden">
+                <label for="annualSalary">Annual Salary ($)</label>
+                <input type="number" id="annualSalary" placeholder="50000" step="1000" min="0">
+                
+                <label for="k401Contribution" style="margin-top: 10px;">Annual 401(k) ($)</label>
+                <input type="number" id="k401Contribution" placeholder="0" value="0" step="100" min="0">
+                <div class="helper-text">// Optional: Enter yearly 401(k) contributions</div>
+            </div>
+            
+            <div id="incomeInput" class="input-group hidden">
+                <label for="totalIncome">Total Income ($)</label>
+                <input type="number" id="totalIncome" placeholder="4000" step="100" min="0">
+                <label for="timePeriod" style="margin-top: 10px;">Time Period</label>
+                <select id="timePeriod">
+                    <option value="week">Per Week</option>
+                    <option value="month" selected>Per Month</option>
+                    <option value="year">Per Year</option>
+                </select>
+                <div class="helper-text">// Income will be annualized for tax calculation</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">[ Target Item ]</div>
+            <div class="input-group">
+                <label for="itemPrice">Item Price ($)</label>
+                <input type="number" id="itemPrice" placeholder="#" step="0.01" min="0">
+            </div>
+        </div>
+        
+        <button onclick="calculate()">[ Execute Calculation ]</button>
+        
+        <div id="errorMessage" class="error-message"></div>
+        
+        <div id="result" class="result">
+            <div class="result-value" id="resultValue"></div>
+            <div class="result-label" id="resultLabel"></div>
+            <div class="result-breakdown" id="resultBreakdown"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Scanline animation control
+        const scanline = document.querySelector('.scanline');
+        
+        function runScanline() {
+            // Set random vertical position
+            const randomTop = Math.random() * 100;
+            scanline.style.top = randomTop + '%';
+            
+            // Reset to start position (completely off screen left)
+            scanline.style.transition = 'none';
+            scanline.style.transform = 'translateX(calc(-100vw - 300px))';
+            
+            // Force reflow
+            void scanline.offsetWidth;
+            
+            // Enable transition and start moving
+            scanline.style.transition = 'transform 5s linear';
+            scanline.style.transform = 'translateX(calc(100vw + 300px))';
+            
+            // After animation completes (2000ms), run again
+            setTimeout(runScanline, 5550);
+        }
+        
+        // Start the scanline animation
+        runScanline();
+        
+        // Toggle input fields based on pay type
+        document.querySelectorAll('input[name="payType"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.getElementById('hourlyInput').classList.add('hidden');
+                document.getElementById('salaryInput').classList.add('hidden');
+                document.getElementById('incomeInput').classList.add('hidden');
+                
+                // Clear error message when switching pay types
+                hideError();
+                
+                if (this.value === 'hourly') {
+                    document.getElementById('hourlyInput').classList.remove('hidden');
+                } else if (this.value === 'salary') {
+                    document.getElementById('salaryInput').classList.remove('hidden');
+                } else {
+                    document.getElementById('incomeInput').classList.remove('hidden');
+                }
+            });
+        });
+        
+        // Clear error message when user starts typing
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', function() {
+                hideError();
+                this.classList.remove('error');
+            });
+        });
+        
+        function showError(message, inputId = null) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = '⚠ ERROR: ' + message.toUpperCase();
+            errorDiv.classList.add('show');
+            
+            // Highlight the problematic input field
+            if (inputId) {
+                const input = document.getElementById(inputId);
+                if (input) {
+                    input.classList.add('error');
+                    input.focus();
+                }
+            }
+            
+            // Hide result if it was showing
+            document.getElementById('result').classList.remove('show');
+        }
+        
+        function hideError() {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.classList.remove('show');
+        }
+        
+        // Estimate federal tax rate based on income (simplified US progressive tax)
+        function estimateTaxRate(annualIncome) {
+            // 2024 single filer tax brackets (simplified)
+            // This is a rough estimate combining federal, state, FICA
+            if (annualIncome <= 11000) {
+                return 0.10; // 10%
+            } else if (annualIncome <= 44725) {
+                return 0.15; // ~15%
+            } else if (annualIncome <= 95375) {
+                return 0.22; // ~22%
+            } else if (annualIncome <= 182100) {
+                return 0.28; // ~28%
+            } else if (annualIncome <= 231250) {
+                return 0.32; // ~32%
+            } else if (annualIncome <= 578125) {
+                return 0.35; // ~35%
+            } else {
+                return 0.40; // ~40%
+            }
+        }
+        
+        function calculate() {
+            // Clear previous errors
+            hideError();
+            document.querySelectorAll('input').forEach(input => input.classList.remove('error'));
+            
+            const payType = document.querySelector('input[name="payType"]:checked').value;
+            const itemPrice = parseFloat(document.getElementById('itemPrice').value);
+            
+            if (!itemPrice || itemPrice <= 0) {
+                showError('Please enter a valid item price', 'itemPrice');
+                return;
+            }
+            
+            let hourlyRate = 0;
+            let taxRate = 0;
+            let afterTaxIncome = 0;
+            let grossIncome = 0;
+            let k401Amount = 0;
+            let takeHomeIncome = 0;
+            let showTaxInfo = false;
+            
+            // Calculate hourly rate based on pay type
+            if (payType === 'hourly') {
+                const hourlyRateInput = parseFloat(document.getElementById('hourlyRate').value);
+                const weekHours = parseFloat(document.getElementById('hourlyWeekHours').value) || 0;
+                
+                if (!hourlyRateInput || hourlyRateInput <= 0) {
+                    showError('Please enter a valid hourly rate', 'hourlyRate');
+                    return;
+                }
+                
+                // If hours per week is provided, calculate tax
+                if (weekHours > 0) {
+                    grossIncome = hourlyRateInput * weekHours * 52; // Annual income
+                    taxRate = estimateTaxRate(grossIncome);
+                    afterTaxIncome = grossIncome * (1 - taxRate);
+                    hourlyRate = afterTaxIncome / (weekHours * 52);
+                    showTaxInfo = true;
+                } else {
+                    // No hours provided, assume hourly rate is after-tax
+                    hourlyRate = hourlyRateInput;
+                }
+            } else if (payType === 'salary') {
+                const salary = parseFloat(document.getElementById('annualSalary').value);
+                k401Amount = parseFloat(document.getElementById('k401Contribution').value) || 0;
+                
+                if (!salary || salary <= 0) {
+                    showError('Please enter a valid annual salary', 'annualSalary');
+                    return;
+                }
+                
+                grossIncome = salary;
+                
+                // 401k contributions reduce taxable income (pre-tax)
+                const taxableIncome = salary - k401Amount;
+                taxRate = estimateTaxRate(taxableIncome);
+                
+                // Take-home = salary - 401k - taxes
+                takeHomeIncome = salary - k401Amount - (taxableIncome * taxRate);
+                
+                // Assume 40 hour work week for salary (2080 hours per year)
+                hourlyRate = takeHomeIncome / 2080;
+                showTaxInfo = true;
+            } else {
+                const income = parseFloat(document.getElementById('totalIncome').value);
+                const period = document.getElementById('timePeriod').value;
+                
+                if (!income || income <= 0) {
+                    showError('Please enter a valid total income', 'totalIncome');
+                    return;
+                }
+                
+                // Convert income to annual for tax calculation
+                let annualIncome = income;
+                if (period === 'week') annualIncome = income * 52;
+                if (period === 'month') annualIncome = income * 12;
+                
+                grossIncome = annualIncome;
+                taxRate = estimateTaxRate(annualIncome);
+                afterTaxIncome = annualIncome * (1 - taxRate);
+                
+                // Calculate hourly rate from after-tax annual income
+                // Assume 40 hours/week, 52 weeks = 2080 hours per year
+                hourlyRate = afterTaxIncome / 2080;
+                showTaxInfo = true;
+            }
+            
+            // Calculate hours and days
+            const hoursNeeded = itemPrice / hourlyRate;
+            const workDays = hoursNeeded / 8; // 8-hour workday
+            
+            // Display results
+            const resultDiv = document.getElementById('result');
+            const resultValue = document.getElementById('resultValue');
+            const resultLabel = document.getElementById('resultLabel');
+            const resultBreakdown = document.getElementById('resultBreakdown');
+            
+            // Determine main display value
+            if (hoursNeeded < 1) {
+                const minutes = Math.round(hoursNeeded * 60);
+                resultValue.textContent = `${minutes} MINUTES`;
+                resultLabel.textContent = 'of work required';
+            } else if (hoursNeeded <= 8) {
+                resultValue.textContent = `${hoursNeeded.toFixed(1)} HOURS`;
+                resultLabel.textContent = 'of work required';
+            } else {
+                resultValue.textContent = `${workDays.toFixed(1)} DAYS`;
+                resultLabel.textContent = 'of work required';
+            }
+            
+            // Build breakdown text
+            let breakdownHTML = '';
+            
+            if (hoursNeeded > 8) {
+                breakdownHTML = `
+                    >> <strong>${workDays.toFixed(1)} work days</strong> (8 hours each)<br>
+                    >> <strong>${hoursNeeded.toFixed(1)} hours</strong> total<br>
+                `;
+            } else {
+                breakdownHTML = `
+                    >> <strong>${hoursNeeded.toFixed(1)} hours</strong> of work<br>
+                `;
+            }
+            
+            // Add 401k info if applicable
+            if (payType === 'salary' && k401Amount > 0) {
+                breakdownHTML += `
+                    <div class="k401-info">
+                        [401K] $${k401Amount.toLocaleString(undefined, {maximumFractionDigits: 0})}/year<br>
+                        [TAKE-HOME] $${takeHomeIncome.toLocaleString(undefined, {maximumFractionDigits: 0})}/year
+                    </div>
+                `;
+            }
+            
+            // Add tax info if applicable
+            if (showTaxInfo && taxRate > 0) {
+                const taxableIncome = payType === 'salary' ? grossIncome - k401Amount : grossIncome;
+                const taxAmount = taxableIncome * taxRate;
+                const netIncome = payType === 'salary' ? takeHomeIncome : afterTaxIncome;
+                
+                breakdownHTML += `
+                    <div class="tax-info">
+                        [TAX RATE] ${(taxRate * 100).toFixed(0)}% (~$${taxAmount.toLocaleString(undefined, {maximumFractionDigits: 0})})<br>
+                        ${payType === 'salary' ? `[TAXABLE] $${taxableIncome.toLocaleString(undefined, {maximumFractionDigits: 0})}/year<br>` : `[GROSS] $${grossIncome.toLocaleString(undefined, {maximumFractionDigits: 0})}/year<br>`}
+                        [NET] $${netIncome.toLocaleString(undefined, {maximumFractionDigits: 0})}/year
+                    </div>
+                `;
+            }
+            
+            breakdownHTML += `<br>>> EFFECTIVE RATE: <strong>$${hourlyRate.toFixed(2)}/hr</strong>`;
+            
+            resultBreakdown.innerHTML = breakdownHTML;
+            
+            resultDiv.classList.add('show');
+        }
+        
+        // Allow Enter key to calculate
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculate();
+            }
+        });
+    </script>
+</body>
+</html>
