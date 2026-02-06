@@ -134,6 +134,10 @@
             box-shadow: 0 0 10px rgba(255, 0, 64, 0.5);
         }
         
+        input.zero-value {
+            color: rgba(0, 255, 65, 0.3);
+        }
+        
         select {
             cursor: pointer;
         }
@@ -459,6 +463,46 @@
         // Start the scanline animation
         runScanline();
         
+        // Handle zero value styling for optional inputs
+        const hourlyWeekHoursInput = document.getElementById('hourlyWeekHours');
+        const k401Input = document.getElementById('k401Contribution');
+        
+        function updateZeroValueStyle(input) {
+            if (input.value === '0' || input.value === '') {
+                input.classList.add('zero-value');
+            } else {
+                input.classList.remove('zero-value');
+            }
+        }
+        
+        // Initialize on page load
+        updateZeroValueStyle(hourlyWeekHoursInput);
+        updateZeroValueStyle(k401Input);
+        
+        // Update on input
+        hourlyWeekHoursInput.addEventListener('input', function() {
+            updateZeroValueStyle(this);
+        });
+        
+        k401Input.addEventListener('input', function() {
+            updateZeroValueStyle(this);
+        });
+        
+        // Update on blur (when user leaves the field)
+        hourlyWeekHoursInput.addEventListener('blur', function() {
+            if (this.value === '') {
+                this.value = '0';
+            }
+            updateZeroValueStyle(this);
+        });
+        
+        k401Input.addEventListener('blur', function() {
+            if (this.value === '') {
+                this.value = '0';
+            }
+            updateZeroValueStyle(this);
+        });
+        
         // Toggle input fields based on pay type
         document.querySelectorAll('input[name="payType"]').forEach(radio => {
             radio.addEventListener('change', function() {
@@ -484,6 +528,14 @@
             input.addEventListener('input', function() {
                 hideError();
                 this.classList.remove('error');
+                
+                // Remove leading zeros from all number inputs
+                if (this.type === 'number') {
+                    let value = this.value;
+                    if (value.length > 1 && value[0] === '0' && value[1] !== '.') {
+                        this.value = value.replace(/^0+/, '') || '0';
+                    }
+                }
             });
         });
         
