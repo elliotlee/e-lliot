@@ -33,7 +33,7 @@
             position: fixed;
             left: 0;
             height: 2px;
-            width: 300px;
+            width: 700px;
             background: linear-gradient(90deg, 
                 transparent 0%,
                 rgba(0, 255, 65, 0.2) 20%,
@@ -453,11 +453,11 @@
             void scanline.offsetWidth;
             
             // Enable transition and start moving
-            scanline.style.transition = 'transform 2s linear';
+            scanline.style.transition = 'transform 4s linear';
             scanline.style.transform = 'translateX(calc(100vw + 300px))';
             
-            // After animation completes (2000ms), run again
-            setTimeout(runScanline, 2050);
+            // After animation completes (4000ms), run again
+            setTimeout(runScanline, 4150);
         }
         
         // Start the scanline animation
