@@ -413,7 +413,7 @@
                     <option value="month" selected>Per Month</option>
                     <option value="year">Per Year</option>
                 </select>
-                <div class="helper-text">// Income will be annualized for tax calculation</div>
+                <div class="helper-text">// After-tax income (take-home pay)</div>
             </div>
         </div>
         
@@ -655,19 +655,18 @@
                     return;
                 }
                 
-                // Convert income to annual for tax calculation
+                // Convert income to annual (this is already after-tax income)
                 let annualIncome = income;
                 if (period === 'week') annualIncome = income * 52;
                 if (period === 'month') annualIncome = income * 12;
                 
-                grossIncome = annualIncome;
-                taxRate = estimateTaxRate(annualIncome);
-                afterTaxIncome = annualIncome * (1 - taxRate);
+                // Total income is already after-tax, so use it directly
+                afterTaxIncome = annualIncome;
                 
                 // Calculate hourly rate from after-tax annual income
                 // Assume 40 hours/week, 52 weeks = 2080 hours per year
                 hourlyRate = afterTaxIncome / 2080;
-                showTaxInfo = true;
+                showTaxInfo = false; // Don't show tax info since this is after-tax
             }
             
             // Calculate hours and days
