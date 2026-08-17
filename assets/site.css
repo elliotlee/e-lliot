@@ -724,7 +724,31 @@ section { position: relative; }
 @media (max-width: 760px) {
   .cv__row { grid-template-columns: 1fr; gap: 0.15rem; padding-block: 1.15rem; }
 }
-.cv__when { font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.1em; color: var(--ink-faint); }
+.cv__when {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  transition: color var(--t-hover) var(--ease-out);
+}
+
+/* Hovering a row is a reading aid, not an affordance: these rows don't click,
+   so no lift, no scale, no pointer cursor. The wash marks your place and the
+   date — normally the dimmest thing in the row — comes up to full ink. */
+.cv__row {
+  padding-inline: clamp(0.5rem, 1.5vw, 0.9rem);
+  margin-inline: calc(-1 * clamp(0.5rem, 1.5vw, 0.9rem));
+  transition: background-color var(--t-hover) var(--ease-out),
+              box-shadow var(--t-hover) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cv__row:hover {
+    background-color: var(--paper-deep);
+    box-shadow: inset 2px 0 0 var(--blue);
+  }
+  .cv__row:hover .cv__when { color: var(--ink); }
+}
 .cv__what { font-weight: 600; }
 .cv__where { color: var(--ink-soft); font-size: 0.94rem; }
 
@@ -801,10 +825,14 @@ section { position: relative; }
   transition: opacity var(--t-enter) var(--ease-out), transform var(--t-enter) var(--ease-out);
 }
 .reveal.is-in { opacity: 1; transform: none; }
-/* short stagger — long delays read as lag, not choreography */
-.reveal:nth-child(2) { transition-delay: 50ms; }
-.reveal:nth-child(3) { transition-delay: 100ms; }
-.reveal:nth-child(4) { transition-delay: 150ms; }
+/* Short stagger for small groups that enter together, like the Pact cells.
+   Deliberately NOT applied to gallery tiles: the delays only run to the 4th
+   child, so a long grid would stagger its first few tiles and snap the rest,
+   which reads as a glitch rather than a cascade. Tiles reveal on scroll
+   individually instead. */
+.reveal:nth-child(2):not(.piece) { transition-delay: 50ms; }
+.reveal:nth-child(3):not(.piece) { transition-delay: 100ms; }
+.reveal:nth-child(4):not(.piece) { transition-delay: 150ms; }
 
 /* first paint */
 .lift { animation: lift 700ms var(--ease-out) both; }
