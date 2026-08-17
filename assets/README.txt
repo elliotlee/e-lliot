@@ -39,15 +39,8 @@ ADDING NEW PHOTOS: THE USUAL SEQUENCE
   1. Drop the photos into assets/art/physical/ or assets/art/digital/
 
   2. python tools/build_gallery.py --rename
-     Renames files to piece_view.jpg (bear1.jpg -> bear_1.jpg). Photos of the
-     SAME piece must share a name and differ only in the trailing number:
-
-         bear_cup_a_1.jpg  \
-         bear_cup_a_2.jpg   >  one tile, three thumbnails
-         bear_cup_a_3.jpg  /
-
-     Two different pieces with the same name get a letter: bear_cup_a_*,
-     bear_cup_b_*. The letter marks the piece, the number marks the view.
+     Tidies whatever names the photos arrived with. See RENAME below.
+     Skip this if you already named the files piece_1.jpg, piece_2.jpg.
 
   3. python tools/build_gallery.py --init-captions
      Adds a captions.json entry for each new piece, with a guessed title.
@@ -59,6 +52,60 @@ ADDING NEW PHOTOS: THE USUAL SEQUENCE
      Converts the photos and rewrites the galleries in the page.
 
   6. git add / commit / push
+
+
+RENAME: WHAT IT ACTUALLY DOES
+-----------------------------
+
+    python tools/build_gallery.py --rename
+
+Renames the photos to piece_view.ext so they group into pieces. Real examples
+from the first batch:
+
+    bear1.jpg           ->  bear_1.jpg
+    horse cup 2.jpg     ->  horse_cup_2.jpg
+    bear cup (1)3.jpg   ->  bear_cup_a_3.jpg
+    bear cup (2)1.jpg   ->  bear_cup_b_1.jpg
+
+It does four things:
+
+  - lowercases, and turns spaces and punctuation into underscores, so no
+    %20 in the URLs and no quoting needed on the command line
+
+  - renumbers the views of each piece to _1, _2, _3. THIS is what groups
+    photos into one tile with thumbnails: everything sharing a name before
+    the final number is treated as the same piece, photographed repeatedly
+
+  - turns a (1) / (2) suffix into a letter: bear_cup_a, bear_cup_b. Two
+    different pieces with the same name would otherwise collide with the
+    view number. The letter marks the piece, the number marks the view.
+
+  - updates the keys in captions.json to match, so titles and dates you
+    already wrote don't get orphaned
+
+Safe to re-run: names that are already correct are left alone. Renames go
+through temporary names first, so a file can never overwrite another one
+that is itself waiting to be renamed.
+
+CAUTION: it decides what counts as one piece purely from the names. Two
+unrelated pieces both called bowl_1.jpg and bowl_2.jpg will merge into a
+single tile with two views. Give different pieces different names.
+
+
+ANIMATED PIECES
+---------------
+
+Drop in a .gif or an animated .webp and it becomes an animating tile, with a
+still poster used for its thumbnail. To make the animation the first thing
+shown for a piece, give it the lowest view number:
+
+    dg_1.webp    the animation, shown first
+    dg_2.jpg     stills
+    dg_3.jpg
+
+Animations get one file at full size rather than three widths, because every
+size in a srcset has to be the same image and a still is not the same image
+as an animation. An animated .webp is copied as-is rather than re-encoded.
 
 
 ORDER OF PIECES
@@ -78,7 +125,9 @@ CAPTIONS.JSON FIELDS
 All optional. Only "title" is really worth filling in for every piece.
 
     "title"    shown in bold under the tile
-    "medium"   shown next to it, e.g. Clay. Defaults per folder.
+    "medium"   shown next to it. Defaults to Ceramic in physical/ and
+               Digital in digital/, so set it for anything else: the
+               acrylic painting carries "medium": "Acrylic".
     "year"     e.g. "2026". Drives the ordering, shown in the caption.
     "month"    e.g. "March". Ordering only, not shown.
     "alt"      description for screen readers. Falls back to the title.
