@@ -1,180 +1,755 @@
 <!DOCTYPE html>
-<html lang = "en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>ELLIOT LEE</title>
-		<meta name="description" content="ELLIOT LEE" />
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Elliot Lee · software implementation, design, sculpture</title>
+	<meta name="description" content="Elliot Lee is a software implementation consultant in Santa Fe, New Mexico, and the founder of Pact Marketplace. Design, 3D, and ceramic sculpture.">
+	<meta name="author" content="Elliot Lee">
 
-		<link rel="stylesheet" href="assets/style2.css">
-	</head>
-	
-	<body id="top">
+	<meta property="og:title" content="Elliot Lee">
+	<meta property="og:description" content="Software implementation consultant in Santa Fe. Founder of Pact Marketplace. Design and sculpture.">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://e-lliot.com/">
+	<!-- a JPEG, not the WebP derivative: several link scrapers still won't render WebP -->
+	<meta property="og:image" content="https://e-lliot.com/assets/art/digital/happiness_free_for_everyone_1.jpg">
+	<meta name="twitter:card" content="summary_large_image">
 
-		<main>
-			<div class="container py-2">
-				<div class="row">
-					<div class="col-4">
-						<h1><a id="main" href="index.html">ELLIOT LEE</a></h1>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<!-- the wordmark font starts downloading before the CSS is parsed -->
+	<link rel="preload" href="assets/fonts/rubik-80s-fade-latin.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="stylesheet" href="assets/site.css">
+	<script>document.documentElement.classList.add('js');</script>
+</head>
 
-						<div class="container" id="collapsibles-nav">
-							<p style="font-size: 1 em; ">* opens to a new tab</p>
-							<!-- <h4>Elliot Lee</h4> -->
-							<h4>about me</h4>
-							<ul>
-								<!--<li><a data-bs-toggle="collapse" data-bs-target="#embedIG" role="button" aria-expanded="false">art</a></li>-->
-								<li><a data-bs-toggle="collapse" data-bs-target="#embedResume" role="button" aria-expanded="false">resume</a></li>
-								<!--<li><a href="https://github.com/elliotlee/" target="_blank" rel="noopener noreferrer">github*</a></li>-->
-								<li><a href="https://www.linkedin.com/in/elliothlee/" target="_blank" rel="noopener noreferrer">linkedin*</a></li>
-								<li><a data-bs-toggle="collapse" data-bs-target="#embedArt" role="button" aria-expanded="false">art</a></li>
-							</ul>
+<body id="top">
 
-							<h4>projects</h4>
-							<ul>
-								<li><a data-bs-toggle="collapse" data-bs-target="#embedFOSNP" role="button" aria-expanded="false">Website Design - Friends of Saguaro National Park</a></li>
+<nav class="nav">
+	<a class="nav__mark" href="#top">Elliot Lee</a>
+	<div class="nav__links">
+		<a href="#now">Now</a>
+		<a href="#cv">Experience</a>
+		<a href="#pact">Pact</a>
+		<a href="#art">Art</a>
+		<a href="#contact" data-optional>Contact</a>
+	</div>
+</nav>
 
-								<!--<li><a href="https://www.cdscrowns.com/" target="_blank" rel="noopener noreferrer">Creative Dental Studio website*</a></li>-->
-							
-								<li><a data-bs-toggle="collapse" data-bs-target="#embedDiary" role="button" aria-expanded="false">YouTube - Python Diary App</a></li>
-								<ul>
-									<li><a data-bs-toggle="collapse" data-bs-target="#embedDiaryCode" role="button" aria-expanded="false">view code</a></li>
-									<!--<li><a href="diaryapp.7z" target="_blank" rel="noopener noreferrer">download*</a></li>-->
-								</ul>
-							
-							</ul>
+<main>
 
-							<!--<h4>cool stuff</h4>-->
-							<!--<ul>
-								<li><a data-bs-toggle="collapse" data-bs-target="#embedIG" role="button" aria-expanded="false">art</a></li>
-								<li><a data-bs-toggle="collapse" data-bs-target="#embedTriangle" role="button" aria-expanded="false">barycentric coord colors</a></li>
-								<ul>
-									<li><a data-bs-toggle="collapse" data-bs-target="#embedTriangleCode" role="button" aria-expanded="false">view code</a></li>
-								</ul>
-								<li><a data-bs-toggle="collapse" data-bs-target="#embedClock" role="button" aria-expanded="false">three.js clock</a></li>
-								<ul>
-									<li><a data-bs-toggle="collapse" data-bs-target="#embedClockCode" role="button" aria-expanded="false">view code</a></li>
-								</ul> -->
-								<!-- <li><a href="#">secret to happiness</a></li> -->
+	<!-- ============================================ hero -->
+	<header class="hero wrap">
+		<div class="hero__orb" aria-hidden="true">
+			<img src="assets/images/expl6.webp" alt="" width="1240" height="1240">
+		</div>
 
-							<!--</ul>-->
+		<div class="hero__inner">
+			<h1 class="hero__mark lift lift--1">Elliot&nbsp;Lee</h1>
 
+			<p class="lede lede--hero lift lift--2">
+				Implementing enterprise software for government, building a local
+				marketplace that takes the uncertainty out of face-to-face
+				transactions, and sculpting animals out of clay.
+			</p>
 
-							<!--<h4>hackathon projects</h4>
-							<ul>
-								<li><a href="donordash/index.html" target="_blank" rel="noopener noreferrer">DonorDash*</a></li>
-								<li><a data-bs-toggle="collapse" data-bs-target="#embedRouteabaga" role="button" aria-expanded="false">Routeabaga</a></li>
-							</ul>-->
+			<div class="hero__meta lift lift--3">
+				<span>Santa Fe, New&nbsp;Mexico</span>
+				<span><a class="u" href="mailto:lee.hanearl@gmail.com">lee.hanearl@gmail.com</a></span>
+			</div>
+		</div>
 
+	</header>
+
+	<!-- ============================================ now -->
+	<section class="now wrap" id="now">
+		<div class="section-head reveal">
+			<span class="section-head__num">01</span>
+			<h2 class="section-head__title">Now</h2>
+		</div>
+
+		<div class="split">
+			<p class="lede reveal">Two jobs, one habit: turn a fuzzy requirement into something that runs.</p>
+
+			<div>
+				<article class="entry reveal">
+					<div class="entry__when">Aug 2023 to Present</div>
+					<div>
+						<h3 class="entry__role">Software Implementation Consultant</h3>
+						<div class="entry__org">FAST Enterprises · Driver Services</div>
+						<div class="entry__body">
+							<p>
+								I configure the systems that run state driver services:
+								client-specific functionality in <strong>C#</strong>, the
+								<strong>SQL</strong> underneath it, and the troubleshooting when
+								the system does something nobody expected.
+							</p>
 						</div>
 					</div>
-				
+				</article>
 
-
-					<div class="col" id="collapsibles">
-						<div class="col collapse collapse-horizontal" id="embedResume" data-bs-parent="#collapsibles" style="height:100%">
-	 						<embed  width="100%" height="100%" src="https://drive.google.com/viewerng/viewer?embedded=true&url=https://e-lliot.com/ElliotLee_resume.pdf"/>
+				<article class="entry reveal">
+					<div class="entry__when">Apr 2026 to Present</div>
+					<div>
+						<h3 class="entry__role">Founder</h3>
+						<div class="entry__org">Pact Marketplace</div>
+						<div class="entry__body">
+							<p>
+								A local marketplace app: product, UX, design system, mobile client,
+								backend, payments, and compliance. <strong>Escrow holds the funds
+								until both sides complete</strong>, so neither person has to trust
+								the other first. Built with AI coding agents as the primary
+								implementation tool.
+							</p>
 						</div>
-
-						<div class="col collapse collapse-horizontal" id="embedFOSNP" data-bs-parent="#collapsibles" style="height:100%">
-	 						<embed  width="100%" height="100%" src="https://drive.google.com/viewerng/viewer?embedded=true&url=https://e-lliot.com/FOSNPDesign.pdf"/>
-						</div>
-
-						<div class="col collapse collapse-horizontal" id="embedDiary" data-bs-parent="#collapsibles" style="height:100%">
-	 						<iframe width="560" height="315" src="https://www.youtube.com/embed/7FcjoOKseZQ?si=kWAZSppfeoCW6BZS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-						</div>
-
-						<div class="col collapse collapse-horizontal" id="embedDiaryCode" data-bs-parent="#collapsibles" style="height:100%">
-	 						<script src="https://gist.github.com/elliotlee/f4585894aa96b7013c45507adaf70ea6.js"></script>
-						</div>
-
-
-						<div class="col collapse collapse-horizontal" id="embedIG" data-bs-parent="#collapsibles" >
-	 						<blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/elliotiot/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/elliotiot/?utm_source=ig_embed&amp;utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">View this profile on Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/elliotiot/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px;" target="_blank">elliot lee</a> (@<a href="https://www.instagram.com/elliotiot/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px;" target="_blank">elliotiot</a>) • Instagram photos and videos</p></div></blockquote>
-<script async src="//www.instagram.com/embed.js"></script>
-						</div>
-
-						<div class = "col collapse collapse-horizontal" id="embedArt" data-bs-parent="#collapsibles" >
-							<script src="https://static.elfsight.com/platform/platform.js" async></script>
-							<div class="elfsight-app-e94e8ad3-80fe-4080-ad6f-93369c119989" data-elfsight-app-lazy></div>
-						</div>
-
-						<div class="col collapse collapse-horizontal" id="embedTriangle" data-bs-parent="#collapsibles" style="height:100%">
-	 						<embed  width="100%" height="100%" src="triangle.html" />
-						</div>
-
-						<div class="col collapse collapse-horizontal" id="embedTriangleCode" data-bs-parent="#collapsibles" style="height:100%">
-	 						<script src="https://gist.github.com/elliotlee/1b5bbca1eeb79015889730cf96068fa2.js"></script>
-						</div>
-
-						<div class="col collapse collapse-horizontal" id="embedClock" data-bs-parent="#collapsibles" style="height:100%">
-	 						<embed  width="100%" height="100%" src="clock.html" />
-						</div>
-
-						<div class="col collapse collapse-horizontal" id="embedClockCode" data-bs-parent="#collapsibles" style="height:100%">
-	 						<script src="https://gist.github.com/elliotlee/4ebd86ce2fd3c96ffbc5c47b7418c3f6.js"></script>
-						</div>
-
-						<div class="col collapse collapse-horizontal" id="embedRouteabaga" data-bs-parent="#collapsibles" style="height:100%">
-	 						<embed  width="100%" height="100%" src="routeabaga.html" />
-						</div>
-						
-						<div class="col collapse show" id="expl" data-bs-parent="#collapsibles" style="height:100%">
-							<div class="pulse">
-		 						<div class="rotate m-5" style="width:50%">
-		 							<img src="assets/images/expl6.webp" class="mt-5 flip" id="explImg">
-		 						</div>
-	 						</div>
-	 					</div>
-
 					</div>
+				</article>
+			</div>
+		</div>
+	</section>
 
+	<!-- ============================================ cv -->
+	<section class="cv wrap" id="cv">
+		<div class="section-head reveal">
+			<span class="section-head__num">02</span>
+			<h2 class="section-head__title">Experience</h2>
+		</div>
+
+		<div class="split">
+			<p class="lede reveal">Three years in enterprise implementation, a B.S. in Biology, a B.S. in Computer Science.</p>
+
+			<div>
+				<div class="cv__list">
+					<div class="cv__row reveal">
+						<div class="cv__when">2026 to Present</div>
+						<div class="cv__what">Founder</div>
+						<div class="cv__where">Pact Marketplace · Santa Fe, NM</div>
+					</div>
+					<div class="cv__row reveal">
+						<div class="cv__when">2023 to Present</div>
+						<div class="cv__what">Software Implementation Consultant</div>
+						<div class="cv__where">FAST Enterprises · Santa Fe, NM</div>
+					</div>
+					<div class="cv__row reveal">
+						<div class="cv__when">2025</div>
+						<div class="cv__what">Sculpture Teacher</div>
+						<div class="cv__where">Paseo Pottery · Santa Fe, NM</div>
+					</div>
+					<div class="cv__row reveal">
+						<div class="cv__when">2023</div>
+						<div class="cv__what">B.S. Computer Science</div>
+						<div class="cv__where">Santa Clara University</div>
+					</div>
+					<div class="cv__row reveal">
+						<div class="cv__when">2022 to 2023</div>
+						<div class="cv__what">VR Lab Technician</div>
+						<div class="cv__where">SCU Imaginarium · Santa Clara, CA</div>
+					</div>
+					<div class="cv__row reveal">
+						<div class="cv__when">2019 to 2021</div>
+						<div class="cv__what">Network Engineer Support</div>
+						<div class="cv__where">Conscious Data Centers · Rancho Cordova, CA</div>
+					</div>
+					<div class="cv__row reveal">
+						<div class="cv__when">2017</div>
+						<div class="cv__what">B.S. Biology</div>
+						<div class="cv__where">Baylor University</div>
+					</div>
+				</div>
+
+				<ul class="skills reveal">
+					<li>C#</li>
+					<li>SQL</li>
+					<li>TypeScript</li>
+					<li>Python</li>
+					<li>C++</li>
+					<li>React Native</li>
+					<li>PostgreSQL</li>
+					<li>REST &amp; webhooks</li>
+					<li>Claude Code</li>
+					<li>UI/UX design</li>
+					<li>Requirements gathering</li>
+					<li>Blender</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<!-- ============================================ pact -->
+	<section class="pact" id="pact">
+		<div class="wrap">
+			<div class="section-head reveal">
+				<span class="section-head__num">03</span>
+				<h2 class="section-head__title">Selected work</h2>
+			</div>
+
+			<h2 class="pact__title reveal">Pact<br>Marketplace</h2>
+			<p class="pact__lede reveal">
+				Selling locally means meeting a stranger and hoping it goes fine. Pact
+				holds the money until both sides finish, so it does. Built end to end:
+				the app, the backend, the payment rails, the tax handling, and the site
+				that sells it.
+			</p>
+
+			<div class="pact__grid">
+				<div class="pact__cell reveal">
+					<h3>Product &amp; design</h3>
+					<p>Every screen looks and behaves like it came from the same place, app and marketing site alike.</p>
+				</div>
+				<div class="pact__cell reveal">
+					<h3>Client &amp; backend</h3>
+					<p>One app on both phones, with listings, orders, and payouts that stay straight under real use.</p>
+				</div>
+				<div class="pact__cell reveal">
+					<h3>Escrow</h3>
+					<p>Nobody pays before the other person delivers, and a dispute has somewhere to go.</p>
+				</div>
+				<div class="pact__cell reveal">
+					<h3>Compliance</h3>
+					<p>Sales tax is handled automatically, so a local seller never has to think about it.</p>
 				</div>
 			</div>
 
+			<a class="pact__cta reveal" href="https://pact.market" target="_blank" rel="noopener noreferrer">
+				Visit pact.market <span aria-hidden="true">→</span>
+			</a>
+		</div>
+	</section>
 
+	<!-- ============================================ design -->
+	<section class="work wrap" id="art">
+		<div class="section-head reveal">
+			<span class="section-head__num">04</span>
+			<h2 class="section-head__title">Art</h2>
+		</div>
 
+		<div class="split">
+			<p class="lede reveal">Clay and pixels.</p>
+			<p class="reveal" style="color: var(--ink-soft);">
+				Hand-built ceramics, Blender, Adobe suite.
+			</p>
+		</div>
 
-			
-		</main>
+		<div class="teach reveal">
+			<h3>Teaching</h3>
+			<p>
+				At <strong>Paseo Pottery</strong> in Santa Fe I designed and taught a
+				six-week course on animal-themed ceramic sculpture: hand-building
+				technique, and integrating hand-built elements into thrown forms.
+				Weekly sessions at the studio's maximum enrollment of ten students.
+			</p>
+		</div>
 
-		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+		<!--
+			Generated from assets/art/physical/ and assets/art/digital/.
+			Drop images in either folder, then run: python tools/build_gallery.py
+			Edit captions.json in those folders, not this markup.
+		-->
+		<!-- GALLERY:art-physical:start -->
+			<div class="subhead subhead--clay reveal">
+				<span class="subhead__label">Physical</span>
+			</div>
 
-		<!-- <script>
-			document.addEventListener("DOMContentLoaded", function() {
-  				document.body.classList.add("loaded");
+			<div class="gallery gallery--auto">
+				<figure class="piece piece--wide reveal">
+					<button type="button" class="piece__frame" aria-label="View Paw full size">
+						<img src="assets/art/physical/_web/paw_1-1440.webp" srcset="assets/art/physical/_web/paw_1-400.webp 400w, assets/art/physical/_web/paw_1-800.webp 800w, assets/art/physical/_web/paw_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/paw_1-1440.webp" alt="Paw" loading="lazy" decoding="async">
+					</button>
+					<figcaption><b>Paw</b> <i>Ceramic, 2026</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--slim views reveal">
+					<button type="button" class="piece__frame" aria-label="View Fawn full size">
+						<img class="is-on" src="assets/art/physical/_web/fawn_1-1440.webp" srcset="assets/art/physical/_web/fawn_1-400.webp 400w, assets/art/physical/_web/fawn_1-800.webp 800w, assets/art/physical/_web/fawn_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/fawn_1-1440.webp" alt="Fawn" loading="lazy" decoding="async">
+						<img src="assets/art/physical/_web/fawn_2-1440.webp" srcset="assets/art/physical/_web/fawn_2-400.webp 400w, assets/art/physical/_web/fawn_2-800.webp 800w, assets/art/physical/_web/fawn_2-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/fawn_2-1440.webp" alt="" loading="lazy" decoding="async">
+					</button>
+					<div class="views__thumbs" role="group" aria-label="Views of Fawn">
+						<button type="button" class="views__thumb is-on" aria-label="View 1" style="background-image: url('assets/art/physical/_web/fawn_1-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 2" style="background-image: url('assets/art/physical/_web/fawn_2-400.webp')"></button>
+					</div>
+					<figcaption><b>Fawn</b> <i>Ceramic, 2026</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--third reveal">
+					<button type="button" class="piece__frame" aria-label="View Barbed Bead full size">
+						<img src="assets/art/physical/_web/barbedbead_1-1440.webp" srcset="assets/art/physical/_web/barbedbead_1-400.webp 400w, assets/art/physical/_web/barbedbead_1-800.webp 800w, assets/art/physical/_web/barbedbead_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/barbedbead_1-1440.webp" alt="Barbed Bead" loading="lazy" decoding="async">
+					</button>
+					<figcaption><b>Barbed Bead</b> <i>Ceramic, 2026</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--third views reveal">
+					<button type="button" class="piece__frame" aria-label="View Horse Cup full size">
+						<img class="is-on" src="assets/art/physical/_web/horse_cup_1-1440.webp" srcset="assets/art/physical/_web/horse_cup_1-400.webp 400w, assets/art/physical/_web/horse_cup_1-800.webp 800w, assets/art/physical/_web/horse_cup_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/horse_cup_1-1440.webp" alt="Horse Cup" loading="lazy" decoding="async">
+						<img src="assets/art/physical/_web/horse_cup_2-1440.webp" srcset="assets/art/physical/_web/horse_cup_2-400.webp 400w, assets/art/physical/_web/horse_cup_2-800.webp 800w, assets/art/physical/_web/horse_cup_2-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/horse_cup_2-1440.webp" alt="" loading="lazy" decoding="async">
+						<img src="assets/art/physical/_web/horse_cup_3-1440.webp" srcset="assets/art/physical/_web/horse_cup_3-400.webp 400w, assets/art/physical/_web/horse_cup_3-800.webp 800w, assets/art/physical/_web/horse_cup_3-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/horse_cup_3-1440.webp" alt="" loading="lazy" decoding="async">
+					</button>
+					<div class="views__thumbs" role="group" aria-label="Views of Horse Cup">
+						<button type="button" class="views__thumb is-on" aria-label="View 1" style="background-image: url('assets/art/physical/_web/horse_cup_1-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 2" style="background-image: url('assets/art/physical/_web/horse_cup_2-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 3" style="background-image: url('assets/art/physical/_web/horse_cup_3-400.webp')"></button>
+					</div>
+					<figcaption><b>Horse Cup</b> <i>Ceramic, 2025</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--third views reveal">
+					<button type="button" class="piece__frame" aria-label="View Jaw full size">
+						<img class="is-on" src="assets/art/physical/_web/jaw_1-1080.webp" srcset="assets/art/physical/_web/jaw_1-400.webp 400w, assets/art/physical/_web/jaw_1-800.webp 800w, assets/art/physical/_web/jaw_1-1080.webp 1080w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/jaw_1-1080.webp" alt="Jaw" loading="lazy" decoding="async">
+						<img src="assets/art/physical/_web/jaw_2-1440.webp" srcset="assets/art/physical/_web/jaw_2-400.webp 400w, assets/art/physical/_web/jaw_2-800.webp 800w, assets/art/physical/_web/jaw_2-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/jaw_2-1440.webp" alt="" loading="lazy" decoding="async">
+					</button>
+					<div class="views__thumbs" role="group" aria-label="Views of Jaw">
+						<button type="button" class="views__thumb is-on" aria-label="View 1" style="background-image: url('assets/art/physical/_web/jaw_1-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 2" style="background-image: url('assets/art/physical/_web/jaw_2-400.webp')"></button>
+					</div>
+					<figcaption><b>Jaw</b> <i>Ceramic, 2025</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--wide reveal">
+					<button type="button" class="piece__frame" aria-label="View Hachiware full size">
+						<img src="assets/art/physical/_web/hachiware_1-1440.webp" srcset="assets/art/physical/_web/hachiware_1-400.webp 400w, assets/art/physical/_web/hachiware_1-800.webp 800w, assets/art/physical/_web/hachiware_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/hachiware_1-1440.webp" alt="Hachiware" loading="lazy" decoding="async">
+					</button>
+					<figcaption><b>Hachiware</b> <i>Ceramic, 2025</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--slim reveal">
+					<button type="button" class="piece__frame" aria-label="View Fishbones full size">
+						<img src="assets/art/physical/_web/fishbones_1-1440.webp" srcset="assets/art/physical/_web/fishbones_1-400.webp 400w, assets/art/physical/_web/fishbones_1-800.webp 800w, assets/art/physical/_web/fishbones_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/fishbones_1-1440.webp" alt="Oval stoneware platter with a fish skeleton carved and glazed dark blue into the surface, head and tail raised in relief." loading="lazy" decoding="async">
+					</button>
+					<figcaption><b>Fishbones</b> <i>Ceramic, 2025</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--third views reveal">
+					<button type="button" class="piece__frame" aria-label="View Birdbath full size">
+						<img class="is-on" src="assets/art/physical/_web/birdbath_1-1440.webp" srcset="assets/art/physical/_web/birdbath_1-400.webp 400w, assets/art/physical/_web/birdbath_1-800.webp 800w, assets/art/physical/_web/birdbath_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/birdbath_1-1440.webp" alt="Birdbath" loading="lazy" decoding="async">
+						<img src="assets/art/physical/_web/birdbath_2-1440.webp" srcset="assets/art/physical/_web/birdbath_2-400.webp 400w, assets/art/physical/_web/birdbath_2-800.webp 800w, assets/art/physical/_web/birdbath_2-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/birdbath_2-1440.webp" alt="" loading="lazy" decoding="async">
+						<img src="assets/art/physical/_web/birdbath_3-1440.webp" srcset="assets/art/physical/_web/birdbath_3-400.webp 400w, assets/art/physical/_web/birdbath_3-800.webp 800w, assets/art/physical/_web/birdbath_3-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/birdbath_3-1440.webp" alt="" loading="lazy" decoding="async">
+					</button>
+					<div class="views__thumbs" role="group" aria-label="Views of Birdbath">
+						<button type="button" class="views__thumb is-on" aria-label="View 1" style="background-image: url('assets/art/physical/_web/birdbath_1-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 2" style="background-image: url('assets/art/physical/_web/birdbath_2-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 3" style="background-image: url('assets/art/physical/_web/birdbath_3-400.webp')"></button>
+					</div>
+					<figcaption><b>Birdbath</b> <i>Ceramic, 2025</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--third views reveal">
+					<button type="button" class="piece__frame" aria-label="View Key Hanger full size">
+						<img class="is-on" src="assets/art/physical/_web/keyhanger_1-1440.webp" srcset="assets/art/physical/_web/keyhanger_1-400.webp 400w, assets/art/physical/_web/keyhanger_1-800.webp 800w, assets/art/physical/_web/keyhanger_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/keyhanger_1-1440.webp" alt="Key Hanger" loading="lazy" decoding="async">
+						<img src="assets/art/physical/_web/keyhanger_2-1440.webp" srcset="assets/art/physical/_web/keyhanger_2-400.webp 400w, assets/art/physical/_web/keyhanger_2-800.webp 800w, assets/art/physical/_web/keyhanger_2-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/keyhanger_2-1440.webp" alt="" loading="lazy" decoding="async">
+						<img src="assets/art/physical/_web/keyhanger_3-1440.webp" srcset="assets/art/physical/_web/keyhanger_3-400.webp 400w, assets/art/physical/_web/keyhanger_3-800.webp 800w, assets/art/physical/_web/keyhanger_3-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/keyhanger_3-1440.webp" alt="" loading="lazy" decoding="async">
+					</button>
+					<div class="views__thumbs" role="group" aria-label="Views of Key Hanger">
+						<button type="button" class="views__thumb is-on" aria-label="View 1" style="background-image: url('assets/art/physical/_web/keyhanger_1-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 2" style="background-image: url('assets/art/physical/_web/keyhanger_2-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 3" style="background-image: url('assets/art/physical/_web/keyhanger_3-400.webp')"></button>
+					</div>
+					<figcaption><b>Key Hanger</b> <i>Ceramic, 2025</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--third views reveal">
+					<button type="button" class="piece__frame" aria-label="View Bunny full size">
+						<img class="is-on" src="assets/art/physical/_web/bunny_1-1440.webp" srcset="assets/art/physical/_web/bunny_1-400.webp 400w, assets/art/physical/_web/bunny_1-800.webp 800w, assets/art/physical/_web/bunny_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/bunny_1-1440.webp" alt="Bunny" loading="lazy" decoding="async">
+						<img src="assets/art/physical/_web/bunny_2-1440.webp" srcset="assets/art/physical/_web/bunny_2-400.webp 400w, assets/art/physical/_web/bunny_2-800.webp 800w, assets/art/physical/_web/bunny_2-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/bunny_2-1440.webp" alt="" loading="lazy" decoding="async">
+					</button>
+					<div class="views__thumbs" role="group" aria-label="Views of Bunny">
+						<button type="button" class="views__thumb is-on" aria-label="View 1" style="background-image: url('assets/art/physical/_web/bunny_1-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 2" style="background-image: url('assets/art/physical/_web/bunny_2-400.webp')"></button>
+					</div>
+					<figcaption><b>Bunny</b> <i>Ceramic, 2025</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--wide reveal">
+					<button type="button" class="piece__frame" aria-label="View Lift 2 full size">
+						<img src="assets/art/physical/_web/lift_b_1-1440.webp" srcset="assets/art/physical/_web/lift_b_1-400.webp 400w, assets/art/physical/_web/lift_b_1-800.webp 800w, assets/art/physical/_web/lift_b_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/lift_b_1-1440.webp" alt="Lift 2" loading="lazy" decoding="async">
+					</button>
+					<figcaption><b>Lift 2</b> <i>Ceramic, 2025</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--slim views reveal">
+					<button type="button" class="piece__frame" aria-label="View Lift full size">
+						<img class="is-on" src="assets/art/physical/_web/lift_a_1-1440.webp" srcset="assets/art/physical/_web/lift_a_1-400.webp 400w, assets/art/physical/_web/lift_a_1-800.webp 800w, assets/art/physical/_web/lift_a_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/lift_a_1-1440.webp" alt="Lift" loading="lazy" decoding="async">
+						<img src="assets/art/physical/_web/lift_a_2-1440.webp" srcset="assets/art/physical/_web/lift_a_2-400.webp 400w, assets/art/physical/_web/lift_a_2-800.webp 800w, assets/art/physical/_web/lift_a_2-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/lift_a_2-1440.webp" alt="" loading="lazy" decoding="async">
+						<img src="assets/art/physical/_web/lift_a_3-1440.webp" srcset="assets/art/physical/_web/lift_a_3-400.webp 400w, assets/art/physical/_web/lift_a_3-800.webp 800w, assets/art/physical/_web/lift_a_3-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/lift_a_3-1440.webp" alt="" loading="lazy" decoding="async">
+					</button>
+					<div class="views__thumbs" role="group" aria-label="Views of Lift">
+						<button type="button" class="views__thumb is-on" aria-label="View 1" style="background-image: url('assets/art/physical/_web/lift_a_1-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 2" style="background-image: url('assets/art/physical/_web/lift_a_2-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 3" style="background-image: url('assets/art/physical/_web/lift_a_3-400.webp')"></button>
+					</div>
+					<figcaption><b>Lift</b> <i>Ceramic, 2025</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--third views reveal">
+					<button type="button" class="piece__frame" aria-label="View Frog Tile full size">
+						<img class="is-on" src="assets/art/physical/_web/frog_tile_1-1440.webp" srcset="assets/art/physical/_web/frog_tile_1-400.webp 400w, assets/art/physical/_web/frog_tile_1-800.webp 800w, assets/art/physical/_web/frog_tile_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/frog_tile_1-1440.webp" alt="Frog Tile" loading="lazy" decoding="async">
+						<img src="assets/art/physical/_web/frog_tile_2-1440.webp" srcset="assets/art/physical/_web/frog_tile_2-400.webp 400w, assets/art/physical/_web/frog_tile_2-800.webp 800w, assets/art/physical/_web/frog_tile_2-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/frog_tile_2-1440.webp" alt="" loading="lazy" decoding="async">
+					</button>
+					<div class="views__thumbs" role="group" aria-label="Views of Frog Tile">
+						<button type="button" class="views__thumb is-on" aria-label="View 1" style="background-image: url('assets/art/physical/_web/frog_tile_1-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 2" style="background-image: url('assets/art/physical/_web/frog_tile_2-400.webp')"></button>
+					</div>
+					<figcaption><b>Frog Tile</b> <i>Ceramic, 2025</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--third reveal">
+					<button type="button" class="piece__frame" aria-label="View Helmet Cat full size">
+						<img src="assets/art/physical/_web/helmet_cat_1-1440.webp" srcset="assets/art/physical/_web/helmet_cat_1-400.webp 400w, assets/art/physical/_web/helmet_cat_1-800.webp 800w, assets/art/physical/_web/helmet_cat_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/helmet_cat_1-1440.webp" alt="Helmet Cat" loading="lazy" decoding="async">
+					</button>
+					<figcaption><b>Helmet Cat</b> <i>Ceramic, 2025</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--third views reveal">
+					<button type="button" class="piece__frame" aria-label="View Cup and Bowl full size">
+						<img class="is-on" src="assets/art/physical/_web/cupandbowl_1-1440.webp" srcset="assets/art/physical/_web/cupandbowl_1-400.webp 400w, assets/art/physical/_web/cupandbowl_1-800.webp 800w, assets/art/physical/_web/cupandbowl_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/cupandbowl_1-1440.webp" alt="Cup and Bowl" loading="lazy" decoding="async">
+						<img src="assets/art/physical/_web/cupandbowl_2-1440.webp" srcset="assets/art/physical/_web/cupandbowl_2-400.webp 400w, assets/art/physical/_web/cupandbowl_2-800.webp 800w, assets/art/physical/_web/cupandbowl_2-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/cupandbowl_2-1440.webp" alt="" loading="lazy" decoding="async">
+					</button>
+					<div class="views__thumbs" role="group" aria-label="Views of Cup and Bowl">
+						<button type="button" class="views__thumb is-on" aria-label="View 1" style="background-image: url('assets/art/physical/_web/cupandbowl_1-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 2" style="background-image: url('assets/art/physical/_web/cupandbowl_2-400.webp')"></button>
+					</div>
+					<figcaption><b>Cup and Bowl</b> <i>Ceramic, 2024</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--wide reveal">
+					<button type="button" class="piece__frame" aria-label="View Mini full size">
+						<img src="assets/art/physical/_web/mini_1-1440.webp" srcset="assets/art/physical/_web/mini_1-400.webp 400w, assets/art/physical/_web/mini_1-800.webp 800w, assets/art/physical/_web/mini_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/mini_1-1440.webp" alt="Mini" loading="lazy" decoding="async">
+					</button>
+					<figcaption><b>Mini</b> <i>Ceramic, 2024</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--slim reveal">
+					<button type="button" class="piece__frame" aria-label="View Rhino full size">
+						<img src="assets/art/physical/_web/rhino_1-1440.webp" srcset="assets/art/physical/_web/rhino_1-400.webp 400w, assets/art/physical/_web/rhino_1-800.webp 800w, assets/art/physical/_web/rhino_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/rhino_1-1440.webp" alt="Rhino" loading="lazy" decoding="async">
+					</button>
+					<figcaption><b>Rhino</b> <i>Ceramic, 2024</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--third views reveal">
+					<button type="button" class="piece__frame" aria-label="View Bear Cup full size">
+						<img class="is-on" src="assets/art/physical/_web/bear_cup_a_1-1440.webp" srcset="assets/art/physical/_web/bear_cup_a_1-400.webp 400w, assets/art/physical/_web/bear_cup_a_1-800.webp 800w, assets/art/physical/_web/bear_cup_a_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/bear_cup_a_1-1440.webp" alt="Unglazed stoneware cup formed as a bear." loading="lazy" decoding="async">
+						<img src="assets/art/physical/_web/bear_cup_a_2-1440.webp" srcset="assets/art/physical/_web/bear_cup_a_2-400.webp 400w, assets/art/physical/_web/bear_cup_a_2-800.webp 800w, assets/art/physical/_web/bear_cup_a_2-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/bear_cup_a_2-1440.webp" alt="" loading="lazy" decoding="async">
+						<img src="assets/art/physical/_web/bear_cup_a_3-1440.webp" srcset="assets/art/physical/_web/bear_cup_a_3-400.webp 400w, assets/art/physical/_web/bear_cup_a_3-800.webp 800w, assets/art/physical/_web/bear_cup_a_3-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/bear_cup_a_3-1440.webp" alt="" loading="lazy" decoding="async">
+					</button>
+					<div class="views__thumbs" role="group" aria-label="Views of Bear Cup">
+						<button type="button" class="views__thumb is-on" aria-label="View 1" style="background-image: url('assets/art/physical/_web/bear_cup_a_1-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 2" style="background-image: url('assets/art/physical/_web/bear_cup_a_2-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 3" style="background-image: url('assets/art/physical/_web/bear_cup_a_3-400.webp')"></button>
+					</div>
+					<figcaption><b>Bear Cup</b> <i>Ceramic, 2024</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--third views reveal">
+					<button type="button" class="piece__frame" aria-label="View Bear Cup 2 full size">
+						<img class="is-on" src="assets/art/physical/_web/bear_cup_b_1-1440.webp" srcset="assets/art/physical/_web/bear_cup_b_1-400.webp 400w, assets/art/physical/_web/bear_cup_b_1-800.webp 800w, assets/art/physical/_web/bear_cup_b_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/bear_cup_b_1-1440.webp" alt="Bear Cup 2" loading="lazy" decoding="async">
+						<img src="assets/art/physical/_web/bear_cup_b_2-1440.webp" srcset="assets/art/physical/_web/bear_cup_b_2-400.webp 400w, assets/art/physical/_web/bear_cup_b_2-800.webp 800w, assets/art/physical/_web/bear_cup_b_2-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/bear_cup_b_2-1440.webp" alt="" loading="lazy" decoding="async">
+					</button>
+					<div class="views__thumbs" role="group" aria-label="Views of Bear Cup 2">
+						<button type="button" class="views__thumb is-on" aria-label="View 1" style="background-image: url('assets/art/physical/_web/bear_cup_b_1-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 2" style="background-image: url('assets/art/physical/_web/bear_cup_b_2-400.webp')"></button>
+					</div>
+					<figcaption><b>Bear Cup 2</b> <i>Ceramic, 2024</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--third views reveal">
+					<button type="button" class="piece__frame" aria-label="View Bunny Bottle full size">
+						<img class="is-on" src="assets/art/physical/_web/bunny_bottle_1-1440.webp" srcset="assets/art/physical/_web/bunny_bottle_1-400.webp 400w, assets/art/physical/_web/bunny_bottle_1-800.webp 800w, assets/art/physical/_web/bunny_bottle_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/bunny_bottle_1-1440.webp" alt="Bunny Bottle" loading="lazy" decoding="async">
+						<img src="assets/art/physical/_web/bunny_bottle_2-1440.webp" srcset="assets/art/physical/_web/bunny_bottle_2-400.webp 400w, assets/art/physical/_web/bunny_bottle_2-800.webp 800w, assets/art/physical/_web/bunny_bottle_2-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/bunny_bottle_2-1440.webp" alt="" loading="lazy" decoding="async">
+					</button>
+					<div class="views__thumbs" role="group" aria-label="Views of Bunny Bottle">
+						<button type="button" class="views__thumb is-on" aria-label="View 1" style="background-image: url('assets/art/physical/_web/bunny_bottle_1-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 2" style="background-image: url('assets/art/physical/_web/bunny_bottle_2-400.webp')"></button>
+					</div>
+					<figcaption><b>Bunny Bottle</b> <i>Ceramic, 2024</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--wide reveal">
+					<button type="button" class="piece__frame" aria-label="View Tiger full size">
+						<img src="assets/art/physical/_web/tiger_1-1440.webp" srcset="assets/art/physical/_web/tiger_1-400.webp 400w, assets/art/physical/_web/tiger_1-800.webp 800w, assets/art/physical/_web/tiger_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/tiger_1-1440.webp" alt="Tiger" loading="lazy" decoding="async">
+					</button>
+					<figcaption><b>Tiger</b> <i>Ceramic, 2024</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--slim views reveal">
+					<button type="button" class="piece__frame" aria-label="View Bear Mask full size">
+						<img class="is-on" src="assets/art/physical/_web/bearmask_1-1440.webp" srcset="assets/art/physical/_web/bearmask_1-400.webp 400w, assets/art/physical/_web/bearmask_1-800.webp 800w, assets/art/physical/_web/bearmask_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/bearmask_1-1440.webp" alt="Bear Mask" loading="lazy" decoding="async">
+						<img src="assets/art/physical/_web/bearmask_2-1440.webp" srcset="assets/art/physical/_web/bearmask_2-400.webp 400w, assets/art/physical/_web/bearmask_2-800.webp 800w, assets/art/physical/_web/bearmask_2-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/bearmask_2-1440.webp" alt="" loading="lazy" decoding="async">
+					</button>
+					<div class="views__thumbs" role="group" aria-label="Views of Bear Mask">
+						<button type="button" class="views__thumb is-on" aria-label="View 1" style="background-image: url('assets/art/physical/_web/bearmask_1-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 2" style="background-image: url('assets/art/physical/_web/bearmask_2-400.webp')"></button>
+					</div>
+					<figcaption><b>Bear Mask</b> <i>Ceramic, 2024</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--third reveal">
+					<button type="button" class="piece__frame" aria-label="View Sleeping Bunny full size">
+						<img src="assets/art/physical/_web/sleepingbunny_1-1439.webp" srcset="assets/art/physical/_web/sleepingbunny_1-400.webp 400w, assets/art/physical/_web/sleepingbunny_1-800.webp 800w, assets/art/physical/_web/sleepingbunny_1-1439.webp 1439w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/sleepingbunny_1-1439.webp" alt="Sleeping Bunny" loading="lazy" decoding="async">
+					</button>
+					<figcaption><b>Sleeping Bunny</b> <i>Ceramic, 2024</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--third views reveal">
+					<button type="button" class="piece__frame" aria-label="View Bear full size">
+						<img class="is-on" src="assets/art/physical/_web/bear_1-1440.webp" srcset="assets/art/physical/_web/bear_1-400.webp 400w, assets/art/physical/_web/bear_1-800.webp 800w, assets/art/physical/_web/bear_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/bear_1-1440.webp" alt="Bear" loading="lazy" decoding="async">
+						<img src="assets/art/physical/_web/bear_2-1440.webp" srcset="assets/art/physical/_web/bear_2-400.webp 400w, assets/art/physical/_web/bear_2-800.webp 800w, assets/art/physical/_web/bear_2-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/bear_2-1440.webp" alt="" loading="lazy" decoding="async">
+					</button>
+					<div class="views__thumbs" role="group" aria-label="Views of Bear">
+						<button type="button" class="views__thumb is-on" aria-label="View 1" style="background-image: url('assets/art/physical/_web/bear_1-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 2" style="background-image: url('assets/art/physical/_web/bear_2-400.webp')"></button>
+					</div>
+					<figcaption><b>Bear</b> <i>Ceramic, 2024</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--third reveal">
+					<button type="button" class="piece__frame" aria-label="View Bloom full size">
+						<img src="assets/art/physical/_web/bloom_1-1440.webp" srcset="assets/art/physical/_web/bloom_1-400.webp 400w, assets/art/physical/_web/bloom_1-800.webp 800w, assets/art/physical/_web/bloom_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/bloom_1-1440.webp" alt="Bloom" loading="lazy" decoding="async">
+					</button>
+					<figcaption><b>Bloom</b> <i>Ceramic, 2023</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--wide reveal">
+					<button type="button" class="piece__frame" aria-label="View Reach full size">
+						<img src="assets/art/physical/_web/reach_1-1440.webp" srcset="assets/art/physical/_web/reach_1-400.webp 400w, assets/art/physical/_web/reach_1-800.webp 800w, assets/art/physical/_web/reach_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/reach_1-1440.webp" alt="Reach" loading="lazy" decoding="async">
+					</button>
+					<figcaption><b>Reach</b> <i>Ceramic, 2023</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--slim reveal">
+					<button type="button" class="piece__frame" aria-label="View Mask full size">
+						<img src="assets/art/physical/_web/mask_1-1440.webp" srcset="assets/art/physical/_web/mask_1-400.webp 400w, assets/art/physical/_web/mask_1-800.webp 800w, assets/art/physical/_web/mask_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/mask_1-1440.webp" alt="Mask" loading="lazy" decoding="async">
+					</button>
+					<figcaption><b>Mask</b> <i>Ceramic, 2023</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--third reveal">
+					<button type="button" class="piece__frame" aria-label="View Small Red Dot full size">
+						<img src="assets/art/physical/_web/small_red_dot_1-1440.webp" srcset="assets/art/physical/_web/small_red_dot_1-400.webp 400w, assets/art/physical/_web/small_red_dot_1-800.webp 800w, assets/art/physical/_web/small_red_dot_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/physical/_web/small_red_dot_1-1440.webp" alt="Small acrylic painting of a blue sky dense with clouds, a single speck of red near the centre right." loading="lazy" decoding="async">
+					</button>
+					<figcaption><b>Small Red Dot</b> <i>Acrylic, 2023</i></figcaption>
+				</figure>
+			</div>
+			<!-- GALLERY:art-physical:end -->
+
+		<!-- GALLERY:art-digital:start -->
+			<div class="subhead reveal">
+				<span class="subhead__label">Digital</span>
+			</div>
+
+			<div class="gallery gallery--auto">
+				<figure class="piece piece--wide reveal">
+					<button type="button" class="piece__frame" aria-label="View Mission Santa Clara full size">
+						<img src="assets/art/digital/_web/santaclara_1-1440.webp" srcset="assets/art/digital/_web/santaclara_1-400.webp 400w, assets/art/digital/_web/santaclara_1-800.webp 800w, assets/art/digital/_web/santaclara_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/digital/_web/santaclara_1-1440.webp" alt="3D model of the Mission Santa Clara buildings, white walls under red tile roofs." loading="lazy" decoding="async">
+					</button>
+					<figcaption><b>Mission Santa Clara</b> <i>3D, 2022</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--slim views reveal">
+					<button type="button" class="piece__frame" aria-label="View Locket full size">
+						<img class="is-on" src="assets/art/digital/_web/dg_1.webp" data-full="assets/art/digital/_web/dg_1.webp" alt="Heart-shaped locket rendered in silver and gold, monogrammed on the front and split across the back." loading="lazy" decoding="async">
+						<img src="assets/art/digital/_web/dg_2-1440.webp" srcset="assets/art/digital/_web/dg_2-400.webp 400w, assets/art/digital/_web/dg_2-800.webp 800w, assets/art/digital/_web/dg_2-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/digital/_web/dg_2-1440.webp" alt="" loading="lazy" decoding="async">
+						<img src="assets/art/digital/_web/dg_3-1440.webp" srcset="assets/art/digital/_web/dg_3-400.webp 400w, assets/art/digital/_web/dg_3-800.webp 800w, assets/art/digital/_web/dg_3-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/digital/_web/dg_3-1440.webp" alt="" loading="lazy" decoding="async">
+						<img src="assets/art/digital/_web/dg_4-1440.webp" srcset="assets/art/digital/_web/dg_4-400.webp 400w, assets/art/digital/_web/dg_4-800.webp 800w, assets/art/digital/_web/dg_4-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/digital/_web/dg_4-1440.webp" alt="" loading="lazy" decoding="async">
+						<img src="assets/art/digital/_web/dg_5-1440.webp" srcset="assets/art/digital/_web/dg_5-400.webp 400w, assets/art/digital/_web/dg_5-800.webp 800w, assets/art/digital/_web/dg_5-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/digital/_web/dg_5-1440.webp" alt="" loading="lazy" decoding="async">
+					</button>
+					<div class="views__thumbs" role="group" aria-label="Views of Locket">
+						<button type="button" class="views__thumb is-on" aria-label="View 1" style="background-image: url('assets/art/digital/_web/dg_1-thumb.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 2" style="background-image: url('assets/art/digital/_web/dg_2-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 3" style="background-image: url('assets/art/digital/_web/dg_3-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 4" style="background-image: url('assets/art/digital/_web/dg_4-400.webp')"></button>
+						<button type="button" class="views__thumb" aria-label="View 5" style="background-image: url('assets/art/digital/_web/dg_5-400.webp')"></button>
+					</div>
+					<figcaption><b>Locket</b> <i>3D, 2022</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--third piece--square reveal">
+					<button type="button" class="piece__frame" aria-label="View Happiness, free, for everyone full size">
+						<img src="assets/art/digital/_web/happiness_free_for_everyone_1-600.webp" srcset="assets/art/digital/_web/happiness_free_for_everyone_1-400.webp 400w, assets/art/digital/_web/happiness_free_for_everyone_1-600.webp 600w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/digital/_web/happiness_free_for_everyone_1-600.webp" alt="Yellow-and-green gradient poster of a blurred smiley face ringed by the repeating text: happiness, free, for everyone, and let no one be forgotten." loading="lazy" decoding="async">
+					</button>
+					<figcaption><b>Happiness, free, for everyone</b> <i>Poster, 2022</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--third reveal">
+					<button type="button" class="piece__frame" aria-label="View Dog Concert full size">
+						<img src="assets/art/digital/_web/dogconcert_1-672.webp" srcset="assets/art/digital/_web/dogconcert_1-400.webp 400w, assets/art/digital/_web/dogconcert_1-672.webp 672w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/digital/_web/dogconcert_1-672.webp" alt="Distressed concert flyer reading 'dog concert @ the dog house, July 20, 8:00pm' over a layered image of a dog." loading="lazy" decoding="async">
+					</button>
+					<figcaption><b>Dog Concert</b> <i>Flyer, 2022</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--third reveal">
+					<button type="button" class="piece__frame" aria-label="View Hot Dog full size">
+						<img src="assets/art/digital/_web/hotdog_1-1470.webp" srcset="assets/art/digital/_web/hotdog_1-400.webp 400w, assets/art/digital/_web/hotdog_1-800.webp 800w, assets/art/digital/_web/hotdog_1-1470.webp 1470w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/digital/_web/hotdog_1-1470.webp" alt="3D render of a hot dog with a wavy mustard line and three pickle slices." loading="lazy" decoding="async">
+					</button>
+					<figcaption><b>Hot Dog</b> <i>3D, 2022</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--wide piece--square reveal">
+					<button type="button" class="piece__frame" aria-label="View Shades full size">
+						<img class="px" src="assets/art/digital/_web/shades_1-480.webp" srcset="assets/art/digital/_web/shades_1-400.webp 400w, assets/art/digital/_web/shades_1-480.webp 480w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/digital/_web/shades_1-480.webp" alt="Pixel art of a duck wearing sunglasses against a beach and sky." loading="lazy" decoding="async">
+					</button>
+					<figcaption><b>Shades</b> <i>Pixel, 2022</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--slim reveal">
+					<button type="button" class="piece__frame" aria-label="View Skull Study full size">
+						<img src="assets/art/digital/_web/skull_study_1-1600.webp" srcset="assets/art/digital/_web/skull_study_1-400.webp 400w, assets/art/digital/_web/skull_study_1-800.webp 800w, assets/art/digital/_web/skull_study_1-1600.webp 1600w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/digital/_web/skull_study_1-1600.webp" alt="Skull Study" loading="lazy" decoding="async">
+					</button>
+					<figcaption><b>Skull Study</b> <i>3D, 2022</i></figcaption>
+				</figure>
+
+				<figure class="piece piece--third reveal">
+					<button type="button" class="piece__frame" aria-label="View Umbrella Birds full size">
+						<img src="assets/art/digital/_web/umbrellabirds_1-1440.webp" srcset="assets/art/digital/_web/umbrellabirds_1-400.webp 400w, assets/art/digital/_web/umbrellabirds_1-800.webp 800w, assets/art/digital/_web/umbrellabirds_1-1440.webp 1440w" sizes="(max-width: 720px) 92vw, (max-width: 1100px) 45vw, 30vw" data-full="assets/art/digital/_web/umbrellabirds_1-1440.webp" alt="Two round 3D bird models perched on umbrella handles." loading="lazy" decoding="async">
+					</button>
+					<figcaption><b>Umbrella Birds</b> <i>3D, 2021</i></figcaption>
+				</figure>
+			</div>
+			<!-- GALLERY:art-digital:end -->
+
+	</section>
+
+	<!-- ============================================ contact -->
+	<footer class="foot" id="contact">
+		<div class="wrap">
+			<div class="section-head reveal">
+				<span class="section-head__num">05</span>
+				<h2 class="section-head__title">Contact</h2>
+			</div>
+
+			<a class="foot__mail reveal" href="mailto:lee.hanearl@gmail.com">lee.hanearl@gmail.com</a>
+
+			<div class="foot__links reveal">
+				<a href="https://pact.market" target="_blank" rel="noopener noreferrer">pact.market ↗</a>
+				<a href="https://www.linkedin.com/in/elliothlee/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+				<a href="ElliotLee_resume.pdf" target="_blank" rel="noopener noreferrer">Résumé (PDF) ↗</a>
+			</div>
+
+			<div class="foot__base">
+				<span>Elliot Lee · Santa Fe, New Mexico</span>
+				<span>e-lliot.com</span>
+			</div>
+		</div>
+	</footer>
+
+</main>
+
+<!-- full-size viewer; <dialog> gives Escape, the focus trap, and focus restore for free -->
+<dialog class="lb" id="lightbox" aria-label="Artwork viewer">
+	<button type="button" class="lb__close" aria-label="Close viewer">&#215;</button>
+	<button type="button" class="lb__nav lb__nav--prev" aria-label="Previous piece">&#8592;</button>
+	<figure class="lb__figure">
+		<img class="lb__img" alt="">
+		<figcaption class="lb__cap"><b></b> <i></i></figcaption>
+	</figure>
+	<button type="button" class="lb__nav lb__nav--next" aria-label="Next piece">&#8594;</button>
+</dialog>
+
+<script>
+	// reveal on scroll
+	(function () {
+		var items = document.querySelectorAll('.reveal');
+		if (!('IntersectionObserver' in window) ||
+			window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			items.forEach(function (el) { el.classList.add('is-in'); });
+			return;
+		}
+		var io = new IntersectionObserver(function (entries) {
+			entries.forEach(function (entry) {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('is-in');
+					io.unobserve(entry.target);
+				}
 			});
-		</script> -->
+		}, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+		items.forEach(function (el) { io.observe(el); });
+	})();
 
-		<!-- <script>
-			window.addEventListener("load", (event) => {
-				document.body.classList.add("loaded");
+	// multi-view pieces: thumbnails crossfade between angles of one object
+	(function () {
+		document.querySelectorAll('.views').forEach(function (piece) {
+			var shots = piece.querySelectorAll('.piece__frame img');
+			var thumbs = piece.querySelectorAll('.views__thumb');
+			if (thumbs.length < 2) return; // single view: nothing to switch
+
+			thumbs.forEach(function (thumb, i) {
+				thumb.addEventListener('click', function () {
+					shots.forEach(function (img, j) { img.classList.toggle('is-on', i === j); });
+					thumbs.forEach(function (t, j) { t.classList.toggle('is-on', i === j); });
+				});
 			});
-		</script> -->
+		});
+	})();
 
-		<script>
-			$('#collapsibles .collapse').each((i, e) => 
-			    $(e).on('hidden.bs.collapse', () => {
-			        // check if an accordion item is expanded
-			        let isExpanded = false;
-			        $('#collapsibles-nav [aria-expanded]').each((i, element) => {
-			            if ($(element).attr("aria-expanded") === 'true') {
-			                isExpanded = true;
-			            }
-			        });
-			    
-			        // show the accordion item
-			        if (!isExpanded) {
-			            $("#expl").collapse("show");
-			        }
-			    })
-			);	
-		</script>
+	// lightbox: tiles open the full-size image
+	(function () {
+		var dialog = document.getElementById('lightbox');
+		if (!dialog || !dialog.showModal) return;
 
-	</body>
+		var img = dialog.querySelector('.lb__img');
+		var capTitle = dialog.querySelector('.lb__cap b');
+		var capMedium = dialog.querySelector('.lb__cap i');
+		var tiles = [].slice.call(document.querySelectorAll('.gallery .piece'));
+		var at = 0;
 
+		function show(i) {
+			at = (i + tiles.length) % tiles.length;
+			var piece = tiles[at];
+			// a multi-view piece opens on whichever angle is currently showing
+			var source = piece.querySelector('.piece__frame img.is-on') ||
+				piece.querySelector('.piece__frame img');
+			var caption = piece.querySelector('figcaption');
 
+			img.src = source.getAttribute('data-full') || source.currentSrc || source.src;
+			img.alt = source.alt || (caption ? caption.textContent.trim() : '');
+			capTitle.textContent = caption ? caption.querySelector('b').textContent : '';
+			capMedium.textContent = caption ? caption.querySelector('i').textContent : '';
+		}
 
+		tiles.forEach(function (piece, i) {
+			var frame = piece.querySelector('.piece__frame');
+			if (!frame) return;
+			frame.addEventListener('click', function () {
+				show(i);
+				dialog.showModal();
+			});
+		});
+
+		dialog.querySelector('.lb__nav--next')
+			.addEventListener('click', function () { show(at + 1); });
+		dialog.querySelector('.lb__nav--prev')
+			.addEventListener('click', function () { show(at - 1); });
+		dialog.querySelector('.lb__close')
+			.addEventListener('click', function () { dialog.close(); });
+
+		// clicking the backdrop (the dialog itself, not its contents) closes
+		dialog.addEventListener('click', function (e) {
+			if (e.target === dialog) dialog.close();
+		});
+
+		document.addEventListener('keydown', function (e) {
+			if (!dialog.open) return;
+			if (e.key === 'ArrowRight') { e.preventDefault(); show(at + 1); }
+			if (e.key === 'ArrowLeft') { e.preventDefault(); show(at - 1); }
+		});
+	})();
+
+	// active section in the nav
+	(function () {
+		var links = Array.prototype.slice.call(document.querySelectorAll('.nav__links a'));
+		var targets = links
+			.map(function (a) { return document.querySelector(a.getAttribute('href')); })
+			.filter(Boolean);
+		if (!targets.length || !('IntersectionObserver' in window)) return;
+
+		var spy = new IntersectionObserver(function (entries) {
+			entries.forEach(function (entry) {
+				if (!entry.isIntersecting) return;
+				links.forEach(function (a) {
+					a.classList.toggle('is-active', a.getAttribute('href') === '#' + entry.target.id);
+				});
+			});
+		}, { rootMargin: '-45% 0px -50% 0px' });
+		targets.forEach(function (el) { spy.observe(el); });
+	})();
+</script>
+
+</body>
 </html>
